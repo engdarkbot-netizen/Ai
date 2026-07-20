@@ -5,9 +5,9 @@
  * produces a markdown digest (saved to ./reports/saudi-stocks-YYYY-MM-DD.md).
  *
  * Usage:
- *   ANTHROPIC_API_KEY=sk-ant-... node saudi-stocks-agent.mjs
+ *   OPENROUTER_API_KEY=sk-or-... node saudi-stocks-agent.mjs
  *
- * Optional env vars: NEWS_MODEL, MAX_SEARCHES, OUTPUT_DIR (see news-agent-core.mjs)
+ * Optional env vars: NEWS_MODEL, MAX_SEARCH_RESULTS, OUTPUT_DIR (see news-agent-core.mjs)
  */
 
 import { runNewsAgent } from './news-agent-core.mjs';
@@ -54,5 +54,4 @@ runNewsAgent({
   slug: 'saudi-stocks',
   system,
   prompt,
-  userLocation: { type: 'approximate', country: 'SA', timezone: 'Asia/Riyadh' },
 }).catch(err => { console.error('Agent error:', err.message); process.exit(1); });

@@ -1,7 +1,7 @@
 {
   "name": "news-agents",
   "version": "1.0.0",
-  "description": "AI news and Saudi stock market (Tadawul) daily briefing agents powered by Claude",
+  "description": "AI news and Saudi stock market (Tadawul) daily briefing agents powered by Claude via OpenRouter",
   "type": "module",
   "scripts": {
     "news:ai": "node ai-news-agent.mjs",
@@ -10,6 +10,6 @@
   },
   "license": "ISC",
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.54.0"
+    "openai": "^4.68.0"
   }
 }

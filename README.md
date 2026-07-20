@@ -1,7 +1,8 @@
 # News Agents
 
-Two AI agents built on the Claude API that gather live news via web search and
-produce dated markdown briefings.
+Two AI agents that gather live news via web search and produce dated markdown
+briefings. They call Claude models through **OpenRouter** (OpenAI-compatible
+API), so all you need is an OpenRouter API key.
 
 | Agent | Script | Report |
 |-------|--------|--------|
@@ -10,6 +11,8 @@ produce dated markdown briefings.
 
 Both agents share a common runner (`news-agent-core.mjs`) that streams the
 briefing to the console as it's written and saves the final markdown report.
+Live news comes from [OpenRouter's web search plugin](https://openrouter.ai/docs/features/web-search),
+which grounds the model's answer in fresh web results.
 
 ## What each agent covers
 
@@ -20,14 +23,15 @@ stories with sources, and a "Worth Watching" section.
 **Saudi Stocks Agent** — TASI market summary, top movers with tickers, company
 news (earnings, dividends, contracts), IPOs on the main market and Nomu, CMA /
 Saudi Exchange regulatory announcements, and macro context (oil, Vision 2030,
-PIF). Searches are geo-targeted to Saudi Arabia and aware of the
-Sunday–Thursday trading week.
+PIF). The prompt targets regional sources (Argaam, saudiexchange.sa, CMA) and
+is aware of the Sunday–Thursday trading week.
 
 ## Run locally
 
 ```bash
-export ANTHROPIC_API_KEY=sk-ant-...
+export OPENROUTER_API_KEY=sk-or-...   # get one at https://openrouter.ai/keys
 
+npm install
 npm run news:ai      # AI news briefing
 npm run news:saudi   # Saudi stocks briefing
 npm run news         # both
@@ -37,10 +41,13 @@ npm run news         # both
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `ANTHROPIC_API_KEY` | — (required) | Anthropic API key |
-| `NEWS_MODEL` | `claude-opus-4-8` | Claude model to use |
-| `MAX_SEARCHES` | `8` | Max web searches per run |
+| `OPENROUTER_API_KEY` | — (required) | OpenRouter API key |
+| `NEWS_MODEL` | `anthropic/claude-sonnet-4.5` | Any OpenRouter model slug |
+| `MAX_SEARCH_RESULTS` | `5` | Web results fed to the model per run |
 | `OUTPUT_DIR` | `./reports` | Where markdown reports are written |
+
+You can point `NEWS_MODEL` at any model OpenRouter offers (e.g. a newer Claude,
+GPT, or Gemini slug) — the web search plugin works across providers.
 
 ## Daily automation
 
@@ -48,13 +55,14 @@ npm run news         # both
 time (04:00 UTC) and uploads the reports as workflow artifacts (kept 30 days).
 It can also be triggered manually from the Actions tab.
 
-**Setup:** add `ANTHROPIC_API_KEY` as a repository secret
+**Setup:** add `OPENROUTER_API_KEY` as a repository secret
 (Settings → Secrets and variables → Actions → New repository secret).
 
 ## Notes
 
-- Web search is a server-side Claude tool — no scraping code or news API keys
-  are needed; each search costs $10 per 1,000 searches plus normal token usage.
+- Web search runs through OpenRouter's web plugin — no scraping code or news
+  API keys are needed. OpenRouter bills a small per-result fee for web search
+  on top of normal model token usage.
 - Reports are gitignored locally; the workflow publishes them as artifacts.
 - Every claim in a briefing includes a source link, and the agents are
   instructed to skip sections with no real news rather than pad.

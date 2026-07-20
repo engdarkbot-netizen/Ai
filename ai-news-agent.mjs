@@ -5,9 +5,9 @@
  * markdown digest (saved to ./reports/ai-news-YYYY-MM-DD.md).
  *
  * Usage:
- *   ANTHROPIC_API_KEY=sk-ant-... node ai-news-agent.mjs
+ *   OPENROUTER_API_KEY=sk-or-... node ai-news-agent.mjs
  *
- * Optional env vars: NEWS_MODEL, MAX_SEARCHES, OUTPUT_DIR (see news-agent-core.mjs)
+ * Optional env vars: NEWS_MODEL, MAX_SEARCH_RESULTS, OUTPUT_DIR (see news-agent-core.mjs)
  */
 
 import { runNewsAgent } from './news-agent-core.mjs';
