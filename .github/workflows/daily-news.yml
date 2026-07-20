@@ -5,6 +5,8 @@ on:
     # 04:00 UTC = 07:00 Riyadh time, every day
     - cron: '0 4 * * *'
   workflow_dispatch:
+  push:
+    branches: [main]
 
 permissions:
   contents: write
