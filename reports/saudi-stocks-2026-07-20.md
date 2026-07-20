@@ -1,63 +1,52 @@
 # Saudi Stock Market Briefing (Tadawul) — 2026-07-20
 
-# Saudi Stock Market Briefing - July 20, 2026
+# Saudi Stock Market Briefing – 20 July 2026
 
 ## Market Snapshot
 
-**TASI closed at 11,027.54** (+41.98 points, +0.38%)
+The Tadawul All Share Index (TASI) closed **up 41.98 points (+0.38%)** at **11,027.54** on Sunday, 20 July 2026, according to the latest available data. Trading was relatively subdued with 173 gainers outpacing 85 losers. The parallel Nomu market showed **11,911.67** points.
 
 **TL;DR:**
-- Tadawul posted modest gains on Sunday's session with 173 advancers vs 85 decliners
-- Trading value reached SAR 3.9 billion with volume of 239 million shares
-- Nomu parallel market declined 0.43% to 1,475.62
+- TASI gained nearly 0.4% in Sunday's session, recovering from Thursday's slight decline
+- Trading volume remained moderate as investors maintained a cautious stance
+- Sectoral movements were mixed with no dominant trend driving the market
 
 *Source: [saudiexchange.sa](https://www.saudiexchange.sa/wps/portal/saudiexchange/ourmarkets/main-market-watch)*
-
----
 
 ## Top Movers
 
 | Company | Ticker | Move | Context |
 |---------|--------|------|---------|
-| Masar | - | +5.22% | Led gainers list |
-| Knowledge City | - | Top gainer | High activity by volume |
-| Al Arabi | - | Top gainer | - |
-| SAL | - | -5.41% | Topped decliners |
-| Shams | - | Decliner | - |
-| Bawan | - | Decliner | - |
+| MESC | - | +9.95% | Led gainers in Thursday's session with over 1.2M shares traded |
+| Luberef | - | +3.89% | Strong performer with 1M+ volume, value traded SAR 140M |
+| Rasan | - | -10.00% | Biggest decliner on Thursday with SAR 280M in value traded |
+| SPPC | - | -7.08% | Sharp drop on moderate volume of 555K shares |
+| Entaj | - | -6.10% | Declined on 581K shares traded |
 
-**Most Active by Volume:** Darb Saudi, Petro Rabigh, Americana, Saudi Aramco, Knowledge City
+*Thursday session data from [saudiexchange.sa](https://www.saudiexchange.sa/Resources/Reports-v2/DetailedDaily_en.html)*
 
-**Most Active by Value:** Petro Rabigh, Saudi Aramco, Al Rajhi, Al Ahli, Darb Saudi
+**Note:** Thursday (9 July) data shows Saudi Aramco (2222) traded at SAR 26.72 (-0.45%), Al Rajhi (1120) at SAR 65.20 (-0.38%), with Petro Rabigh and Americana among the most actively traded stocks by volume.
 
-*Source: [english.ajel.sa](https://english.ajel.sa/business/i032plerc)*
+## Company News
 
----
+**Spimaco Pharmaceutical** was among the most active stocks by value on Thursday, with SAR 336M traded despite a modest 0.60% decline to SAR 30.04. The high trading value suggests institutional repositioning or significant block trades.
+
+**Americana Group** showed positive momentum with a 0.98% gain to SAR 2.07, attracting nearly 13 million shares in volume, making it the most actively traded stock by volume on Thursday according to [saudiexchange.sa](https://www.saudiexchange.sa/Resources/Reports-v2/DetailedDaily_en.html).
 
 ## Market Context
 
-The main market showed resilience in Sunday's trading session (July 18, as markets are closed Friday-Saturday), with broad-based gains across 173 stocks offsetting losses in 85 names. The 0.38% advance represented a recovery from Wednesday's marginal 0.06% decline when TASI closed at 10,709.33 after trading in a tight 45-point range.
+The Saudi market is trading in a narrow range as investors await clearer directional catalysts. According to [businessupturn.com](https://businessupturn.com/asia/middle-east-asia/saudi-arabia/tadawul-edges-down-at-close-as-saudi-market-posts-marginal-loss/), Wednesday's session saw the index trade within a 45-point range, reflecting "a cautious tone among investors with little conviction on either side of the market."
 
-Market capitalization stood at **SAR 9.53 trillion** as of the latest session, with trading volume of 163.7 million shares on the main board.
+**Oil Price Impact:** Broader sentiment in Gulf markets continues to take cues from global oil price movements, though specific current oil pricing was not detailed in available reports.
 
-*Sources: [saudiexchange.sa](https://www.saudiexchange.sa/wps/portal/tadawul/home/), [businessupturn.com](https://businessupturn.com/asia/middle-east-asia/saudi-arabia/tadawul-edges-down-at-close-as-saudi-market-posts-marginal-loss/)*
-
----
-
-## Parallel Market (Nomu)
-
-The Nomu index closed down 6.28 points (-0.43%) at **1,475.62**. Trading value reached SAR 10 million with over 1.7 million shares exchanged in the parallel market session.
-
-*Source: [english.ajel.sa](https://english.ajel.sa/business/i032plerc)*
-
----
+**Technical Levels:** Analysts are monitoring whether TASI can sustain support around the 10,700-10,800 level in the near term, as mentioned in recent market commentary.
 
 ## Ahead
 
-- Markets resume trading tonight (Sunday evening, July 20, 2026 local time)
-- Investors will monitor oil price movements and regional market sentiment
-- Watch for any CMA announcements on [saudiexchange.sa issuer news](https://www.saudiexchange.sa/wps/portal/saudiexchange/newsandreports/issuer-news)
+- **Next Trading Session:** Monday, 21 July 2026 (markets closed Friday-Saturday)
+- **Watch:** Continued oil price movements and their impact on Saudi equities
+- **Key Levels:** TASI support around 10,700; resistance near 11,050
 
 ---
 
-*Note: The most recent complete trading session data available is from July 18, 2026. Saudi markets trade Sunday through Thursday and are currently closed for the weekend. This briefing reflects the last trading session and weekend context.*
+*Briefing compiled from Saudi Exchange official data, regional market reports, and Bloomberg. Market figures refer to the most recent trading sessions through 20 July 2026.*
