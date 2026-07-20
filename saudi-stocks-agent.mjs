@@ -42,7 +42,10 @@ Output format (markdown):
   is real news in them today; do not pad
 - Every figure and claim must include a source link; state clearly which
   trading session the numbers refer to
-- End with "Ahead": upcoming earnings, IPO dates, or events to watch`;
+- End with "Ahead": upcoming earnings, IPO dates, or events to watch
+- Output only the briefing itself. Do not narrate your search process, list
+  your search queries, or write any text before the briefing - start directly
+  with the "# ..." title heading.`;
 
 const prompt = `Produce today's Saudi stock market briefing (${today}). Search for
 the latest Tadawul market data and news across the coverage areas, then write the

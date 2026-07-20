@@ -76,6 +76,11 @@ export async function runNewsAgent({ title, emoji, slug, system, prompt }) {
     console.error(`\n  ERROR: No digest produced (finish_reason: ${finishReason})\n`);
     process.exit(1);
   }
+
+  // Drop any search narration the model emitted before the briefing itself —
+  // the report should start at its first markdown heading.
+  const firstHeading = digest.search(/^#{1,3} /m);
+  if (firstHeading > 0) digest = digest.slice(firstHeading);
   if (finishReason === 'length') {
     console.warn('\n  WARNING: Output hit the max_tokens limit and may be truncated');
   }

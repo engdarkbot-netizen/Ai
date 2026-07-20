@@ -1,39 +1,5 @@
 # Saudi Stock Market Briefing (Tadawul) — 2026-07-20
 
-I'll search for the latest Saudi stock market data and news for today, July 20, 2026.
-
-```search
-Tadawul TASI Saudi stock market July 20 2026
-```
-
-```search
-Saudi Arabia stock market news today July 2026 Argaam
-```
-
-```search
-TASI index movers gainers losers July 2026
-```
-
-```search
-Saudi Aramco Al Rajhi SABIC stock price July 2026
-```
-
-```search
-Saudi Arabia IPO listings Nomu July 2026
-```
-
-```search
-CMA Saudi Capital Market Authority announcements July 2026
-```
-
-```search
-Oil prices Brent WTI July 20 2026
-```
-
-```search
-Vision 2030 PIF Saudi Arabia news July 2026
-```
-
 # Saudi Stock Market Briefing - July 20, 2026
 
 ## Market Snapshot

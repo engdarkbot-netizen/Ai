@@ -34,7 +34,10 @@ Output format (markdown):
 - Then short sections for the remaining coverage areas that have news today
 - End with "Worth Watching": 1-3 developing stories to track
 - Every claim must include a source link. Skip a section entirely if nothing
-  meaningful happened in it today - do not pad.`;
+  meaningful happened in it today - do not pad.
+- Output only the briefing itself. Do not narrate your search process, list
+  your search queries, or write any text before the briefing - start directly
+  with the "# ..." title heading.`;
 
 const prompt = `Produce today's AI news briefing (${today}). Search for the latest
 AI news across the coverage areas, then write the full markdown digest.`;
