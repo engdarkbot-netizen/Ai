@@ -49,14 +49,31 @@ npm run news         # both
 You can point `NEWS_MODEL` at any model OpenRouter offers (e.g. a newer Claude,
 GPT, or Gemini slug) — the web search plugin works across providers.
 
-## Daily automation
+## Deployment: daily runs + public web page
 
-`.github/workflows/daily-news.yml` runs both agents every day at 07:00 Riyadh
-time (04:00 UTC) and uploads the reports as workflow artifacts (kept 30 days).
-It can also be triggered manually from the Actions tab.
+`.github/workflows/daily-news.yml` does everything in the cloud — no server
+needed:
 
-**Setup:** add `OPENROUTER_API_KEY` as a repository secret
-(Settings → Secrets and variables → Actions → New repository secret).
+1. Runs both agents every day at 07:00 Riyadh time (04:00 UTC)
+2. Commits the markdown reports to the repo (`reports/`), building an archive
+3. Builds a static website from them (`build-site.mjs` → `site/`)
+4. Publishes the site to **GitHub Pages**:
+   `https://<owner>.github.io/<repo>/`
+
+The page shows the latest AI news and Saudi stocks briefings plus an archive
+of past days, and refreshes automatically after every run. It can also be
+triggered manually from the Actions tab (Run workflow).
+
+**One-time setup:**
+
+1. Add `OPENROUTER_API_KEY` as a repository secret
+   (Settings → Secrets and variables → Actions → New repository secret)
+2. Make sure GitHub Pages is allowed: on a free GitHub plan the repo must be
+   **public** for Pages to work (Settings → General → Change visibility)
+3. Trigger the workflow once from the Actions tab — the first run enables
+   Pages and publishes the site
+
+Preview the site locally with `npm run build:site` then open `site/index.html`.
 
 ## Notes
 

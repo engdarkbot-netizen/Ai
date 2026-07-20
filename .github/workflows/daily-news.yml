@@ -6,10 +6,22 @@ on:
     - cron: '0 4 * * *'
   workflow_dispatch:
 
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: daily-news
+  cancel-in-progress: false
+
 jobs:
   news:
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
 
@@ -20,19 +32,41 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # continue-on-error so one failed agent doesn't block publishing the
+      # site (it falls back to the previously committed reports)
       - name: Run AI news agent
+        continue-on-error: true
         env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
         run: node ai-news-agent.mjs
 
       - name: Run Saudi stocks agent
+        continue-on-error: true
         env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
         run: node saudi-stocks-agent.mjs
 
-      - name: Upload reports
-        uses: actions/upload-artifact@v4
+      - name: Commit reports to the repo (archive)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports || true
+          git diff --cached --quiet || git commit -m "Daily reports $(date -u +%F) [skip ci]"
+          git push
+
+      - name: Build site
+        run: node build-site.mjs
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
         with:
-          name: news-reports-${{ github.run_id }}
-          path: reports/
-          retention-days: 30
+          enablement: true
+
+      - name: Upload site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -6,10 +6,12 @@
   "scripts": {
     "news:ai": "node ai-news-agent.mjs",
     "news:saudi": "node saudi-stocks-agent.mjs",
-    "news": "node ai-news-agent.mjs && node saudi-stocks-agent.mjs"
+    "news": "node ai-news-agent.mjs && node saudi-stocks-agent.mjs",
+    "build:site": "node build-site.mjs"
   },
   "license": "ISC",
   "dependencies": {
+    "marked": "^18.0.6",
     "openai": "^4.68.0"
   }
 }
