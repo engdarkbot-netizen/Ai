@@ -1,0 +1,6 @@
+target/
+*.class
+requirements.json
+tender-spec.json
+review.html
+dependency-reduced-pom.xml
