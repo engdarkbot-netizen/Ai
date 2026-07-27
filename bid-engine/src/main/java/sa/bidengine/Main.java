@@ -2,6 +2,9 @@ package sa.bidengine;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import sa.bidengine.comply.ComplyCommand;
+import sa.bidengine.draft.DraftCommand;
+import sa.bidengine.export.ExportCommand;
 import sa.bidengine.llm.AnthropicLlmClient;
 import sa.bidengine.model.Requirement;
 import sa.bidengine.model.TenderSpec;
@@ -15,27 +18,55 @@ import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.List;
 
 /**
- * نقطة التشغيل — العطلة الأولى:
- *   java -jar bid-engine.jar path/to/كراسة.pdf
+ * نقطة التشغيل — الخط كاملاً بأوامر فرعية بترتيب الاستخدام الطبيعي:
  *
- * المخرجات (بجانب ملف الكراسة):
- *   requirements.json  مصفوفة المتطلبات وحدها
- *   tender-spec.json   عقد النظام كاملاً (بيانات المنافسة + المتطلبات + معايير التقييم + المستندات)
- *   review.html        مصفوفة المراجعة اليدوية — افتحها بجانب الكراسة وتحقق بنداً-بنداً
+ *   extract <كراسة.pdf>                        كراسة ← requirements.json + tender-spec.json + review.html
+ *   draft   <tender-spec.json> <وثائق العميل/> <إخراج/>   قاعدة معرفة العميل ← قسما المنهجية وسابقة الأعمال
+ *   comply  <tender-spec.json> <kb-index.json> <إخراج/>   مصفوفة الامتثال: مُغطى/ناقص/يحتاج مدخلاً
+ *   export  <مجلد ملفات JSON> <output.docx>                تجميع مسودة العرض النهائية docx
  *
- * معيار نجاح العطلة: دقة تفوق 90% على 3 كراسات حقيقية — تتحقق منها يدوياً بنداً بنداً.
+ * تمرير ملف .pdf مباشرة بلا أمر = extract (توافق مع الاستخدام الأول).
+ * كل المخرجات مسودات للمراجعة البشرية بنداً-بنداً — دائماً.
  */
 public class Main {
 
     public static void main(String[] args) throws Exception {
         if (args.length < 1) {
-            System.out.println("الاستخدام: java -jar bid-engine.jar <ملف الكراسة.pdf>");
+            usage();
             return;
         }
-        File pdf = new File(args[0]);
+        String[] rest = Arrays.copyOfRange(args, 1, args.length);
+        switch (args[0]) {
+            case "extract" -> {
+                if (rest.length < 1) { usage(); return; }
+                extract(new File(rest[0]));
+            }
+            case "draft" -> DraftCommand.run(rest);
+            case "comply" -> ComplyCommand.run(rest);
+            case "export" -> ExportCommand.run(rest);
+            default -> {
+                // توافق خلفي: java -jar bid-engine.jar كراسة.pdf
+                if (args[0].toLowerCase().endsWith(".pdf")) extract(new File(args[0]));
+                else usage();
+            }
+        }
+    }
+
+    private static void usage() {
+        System.out.println("""
+            الاستخدام: java -jar bid-engine.jar <أمر> ...
+              extract <ملف الكراسة.pdf>
+              draft   <tender-spec.json> <مجلد وثائق العميل> <مجلد الإخراج>
+              comply  <tender-spec.json> <kb-index.json> <مجلد الإخراج>
+              export  <مجلد ملفات JSON> <مسار output.docx>
+            (تمرير ملف .pdf مباشرة = extract)""");
+    }
+
+    private static void extract(File pdf) throws Exception {
         if (!pdf.exists()) {
             System.err.println("الملف غير موجود: " + pdf.getAbsolutePath());
             return;

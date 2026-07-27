@@ -24,18 +24,24 @@
 5. **ممنوع الإفراط الهندسي:** لا Spring، لا قاعدة بيانات، لا Docker، لا microservices، لا واجهات — حتى يفرضها عميل حقيقي. CLI + ملفات تكفي الآن. أي اقتراح بنية تحتية "للتوسع" ارفضه وذكّر بهذه القاعدة.
 6. **جودة العربية الرسمية** هي معيار اختيار أي نموذج لغوي — تُختبر على كراسات حقيقية، لا افتراضاً.
 
-## حالة الكود الحالية (مُرجمة ومُختبرة)
+## حالة الكود الحالية (مُرجمة ومُختبرة — كود العطلات 1–4 مكتمل، ومعايير نجاحها الميدانية لم تتحقق بعد)
 ```
 bid-engine/
 ├── pom.xml                     Java 21, PDFBox 3.0.3, Jackson 2.17.2 (+lib/ جاهزة)
+├── src/test-manual/            اختبارات دخان يدوية بعميل LLM وهمي (خارج الـ jar)
 └── src/main/java/sa/bidengine/
-    ├── Main.java               CLI: كراسة.pdf ← requirements.json
-    ├── model/                  TenderSpec, Requirement (فيه sourceQuote الإلزامي), EvaluationCriterion
+    ├── Main.java               CLI بأوامر: extract / draft / comply / export
+    ├── model/                  TenderSpec, Requirement, EvaluationCriterion, MandatoryDocument (كلها بـ sourceQuote إلزامي)
     ├── pdf/PdfTextExtractor    استخراج صفحة-صفحة + كاشف الممسوح ضوئياً (emptyPageRatio)
-    ├── pipeline/TextChunker    تقطيع بالأحرف مع تداخل + ترويسات [صفحة N]
-    ├── pipeline/RequirementExtractor  المطالبة العربية + parsing دفاعي + dedupe + الترقيم
-    └── llm/                    واجهة LlmClient + تنفيذ Anthropic (المفتاح من ANTHROPIC_API_KEY)
+    ├── pipeline/               TextChunker + RequirementExtractor + TenderInfoExtractor (معايير التقييم والمستندات)
+    ├── report/                 review.html — مصفوفة المراجعة اليدوية
+    ├── kb/                     قاعدة معرفة العميل: فهرسة + استرجاع بتطبيع عربي (لا embeddings)
+    ├── draft/                  قسما المنهجية وسابقة الأعمال — اقتباسات تُتحقق برمجياً، الفجوات needsInput
+    ├── comply/                 مصفوفة الامتثال — «مُغطى» لا يُقبل إلا بدليل حرفي متحقق منه برمجياً
+    ├── export/                 مسودة العرض docx (OOXML يدوي، RTL، بلا اعتماديات وبلا LLM)
+    └── llm/                    واجهة LlmClient + تنفيذ Anthropic بإعادة محاولة (المفتاح من ANTHROPIC_API_KEY)
 ```
+**تنبيهان معلّقان يحتاجان تحقق المؤسس يدوياً:** (1) فتح proposal.docx في Microsoft Word/LibreOffice لم يُختبر في بيئة التطوير السحابية — جرّبه على جهازك قبل اعتماده. (2) كل معايير النجاح الميدانية (دقة 90%+ على 3 كراسات حقيقية، جودة العربية على كراسات فعلية) ما زالت بوابة إلزامية لم تُعبر.
 **حالة حافة موثقة:** استخراج PDF العربي قد يعيد ترتيب الكلمات معكوساً/مبعثراً حسب مصدر الملف — يؤثر على مطابقة sourceQuote الحرفية (قد تحتاج تطبيع مسافات/ترتيب). فوضى الوثائق الحكومية هي الخندق التنافسي — استثمر فيها.
 
 ## خارطة البناء (عطل نهاية أسبوع — التزم بالترتيب ومعايير النجاح)
