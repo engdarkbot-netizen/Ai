@@ -1,65 +1,71 @@
 # Saudi Stock Market Briefing (Tadawul) — 2026-08-08
-<!-- meta: model=anthropic/claude-sonnet-4.5 sources=4 verified=yes generated=2026-08-08T10:53:03.011Z -->
+<!-- meta: model=anthropic/claude-sonnet-4.5 sources=4 verified=yes generated=2026-08-08T11:04:16.023Z -->
 
 # Saudi Stock Market Briefing – 8 August 2026
 
 ## Market Snapshot
 
-**TASI: 11,187.66** | **-50.41 (-0.45%)** | **Volume: SAR 6bn**
+**TASI: 10,973.08** (+44.29, +0.40%)
 
-- The Tadawul All Share Index declined 0.45%, closing at 11,187.66 points with SAR 6 billion in trading value
-- 297 million shares traded during the session, with 189 companies advancing and 66 declining
-- Parallel market (Nomu) rose 242.49 points to 22,159.27 with SAR 19 million traded
+- Saudi benchmark closed higher on Monday with SAR 5.7 billion in trading value and 268 million shares exchanged
+- 96 companies advanced while 164 declined, reflecting selective investor positioning
+- Key support came from blue-chip stocks including Saudi Aramco, Al Rajhi Bank, Al Ahli Bank, Alinma Bank, and STC
 
-[saudiexchange.sa](https://www.saudiexchange.sa/wps/portal/saudiexchange/ourmarkets/main-market-watch/main-market-performance)
+*Source: [thepeninsulaqatar.com](https://thepeninsulaqatar.com/article/08/06/2026/saudi-stock-market-index-closes-higher-5)*
+
+## Parallel Market
+
+**Nomu: 22,750.48** (-239.14, -1.04%)
+
+- Parallel market declined with SAR 15 million traded and 1.1 million shares exchanged
+- Continues volatility trend seen in recent sessions
+
+*Source: [thepeninsulaqatar.com](https://thepeninsulaqatar.com/article/08/06/2026/saudi-stock-market-index-closes-higher-5)*
 
 ## Top Movers
 
-| Company | Move | Notes |
-|---------|------|-------|
-| Aslak | +9.94% | Top gainer |
-| Medgulf Insurance | Strong gain | Insurance sector strength |
-| Printing and Packaging | Strong gain | Among top gainers |
-| Al-Etihad | -7.73% | Biggest decliner |
-| Dallah Healthcare | Decline | Among top decliners |
-| Mutakamelah | Decline | Among top decliners |
+**Monday's Leading Gainers:**
+- CGS-CIMB Saudi Arabia
+- National Education Company (Al Wataniya)
+- Amana Insurance
+- Maharat
+- Walaa Insurance
 
-**Most Active by Volume:** Petro Rabigh, Saudi Aramco, Americana, Kayan Saudi, Export Development
+**Leading Decliners:**
+- Al Mamlaka (Kingdom Holding) 
+- Saudi Pharmaceutical Industries & Medical Appliances (SPIMACO)
+- SAICO
+- Al Kathiri Holding
+- National Industrialization Company (Tasnee) - down 4.31%
 
-**Most Active by Value:** Saudi Aramco, Petro Rabigh, Al Rajhi, Al Ahli, Alinma
+**Most Active by Volume:**
+- Americana Group
+- Saudi Steel Pipe Company (Abyat)
+- Pan Gulf Holding
+- Saudi Aramco
+- Al Rajhi Bank
 
-[ajel.sa](https://english.ajel.sa/saudi-arabia/1cu3818ci)
+*Source: [saudinabd.com](https://saudinabd.com/ecconomy/0806/57847/)*
 
-## Recent Company News
+## Recent Sessions Context
 
-**Aldrees Petroleum and Transport Services:**
-- Q1 2026 net profit reached SAR 110 million, up 8.9% year-on-year
-- Stock closed at SR 124.60, down 1.92%
-- Growth driven by higher sales from petrol and transport divisions, increased bank deposit income, and higher returns from joint venture investments
+**Tuesday (Previous Session):** TASI closed at 10,858.14 (+34.52), with SAR 6 billion traded. Petro Rabigh, Saudi Aramco, Americana, Kayan Saudi, and Export Development led volume. Aslak, Medgulf Insurance, Printing and Packaging, Astra Industrial, and Walaa were top gainers (up to +9.94%). Al-Etihad, Dallah Healthcare, Mutakamelah, SAICO, and Tabuk Agricultural declined (down to -7.73%).
 
-**Saudi National Bank:**
-- Q1 2026 net profit of SAR 6.42 billion, up 6.66% year-on-year
-- Growth attributed to higher operating income and lower operating expenses
-- Stock closed at SR 41.94, down 2.40%
+*Source: [ajel.sa](https://english.ajel.sa/saudi-arabia/1cu3818ci)*
 
-[arabnews.com](https://www.arabnews.com/node/2640726/amp)
+**Wednesday:** TASI gained 0.3% to 10,888 points (highest close in over a month) with SAR 5.1 billion traded. Al Rajhi Bank rose 1% to SAR 65, ACWA Power climbed 3% to SAR 201.30, and Maaden gained 2% to SAR 59.60. Alandalus Sports Clubs, Al Wataniya, ACIG, Aslak, and PCI advanced 5-10%. Saudi Aramco fell 1% to SAR 26.74, while Saudi Investment Bank dropped 2% to SAR 13.80 (ex-dividend).
 
-## Market Context
+*Source: [aawsat.com](https://english.aawsat.com/business/5303747-saudi-market-extends-gains-support-blue-chip-stocks)*
 
-**Year-to-Date Performance:** The TASI has gained 6.29% in 2026, with April closing at 11,187.66 after a -0.45% decline on the final day of the month.
+## Company News
 
-**52-Week Range:** The index has traded between approximately 10,193.83 and 11,781.68 over the past year, currently positioned in the middle of this range.
+**Earnings Disappointments:** Retal declined 8% and Marafiq fell 10% after reporting Q2 2026 losses. Lumi Rental dropped 5% to SAR 27.24 (lowest since IPO) following an 80% year-on-year profit decline in Q2 2026.
 
-**Sector Rotation:** Recent sessions have shown increased activity in banking stocks (Al Rajhi, SNB, Alinma) and energy names (Saudi Aramco, Petro Rabigh), indicating sustained investor interest in these core sectors.
+*Source: [aawsat.com](https://english.aawsat.com/business/5303747-saudi-market-extends-gains-support-blue-chip-stocks)*
 
-[countryeconomy.com](https://countryeconomy.com/stock-exchange/saudi-arabia?dr=2026-04)
+## Market Outlook
 
-## Ahead
+The main index approaches the psychological 11,000 level after multiple positive sessions driven by blue-chip stocks. Continued selectivity evident in mixed breadth, with investors favoring established names while remaining cautious on earnings misses. The parallel market's weakness contrasts with main market resilience.
 
-**Watch for:**
-- Continuation of Q1 2026 earnings reports from listed companies
-- Trading patterns in banking and energy sectors, which dominate market value
-- Technical support levels as the index navigates mid-range territory
-- Sector rotation dynamics between financial and industrial stocks
-
-**Trading Note:** Markets are closed Friday-Saturday; next session Sunday, 10 August 2026.
+---
+*Data as of Monday, 8 August 2026. Tadawul trades Sunday-Thursday. Note: Some cited sources reference earlier sessions to provide context for Monday's trading.*
