@@ -5,6 +5,13 @@ on:
     # 04:00 UTC = 07:00 Riyadh time, every day
     - cron: '0 4 * * *'
   workflow_dispatch:
+    inputs:
+      agent:
+        description: 'Which agent to run'
+        required: false
+        default: 'both'
+        type: choice
+        options: [both, ai-news, saudi-stocks]
   push:
     branches: [main]
 
@@ -24,6 +31,9 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    env:
+      # 'both' for scheduled runs and pushes; the chosen agent for manual runs
+      AGENT: ${{ github.event.inputs.agent || 'both' }}
     steps:
       - uses: actions/checkout@v4
 
@@ -38,15 +48,27 @@ jobs:
       # site (it falls back to the previously committed reports)
       - name: Run AI news agent
         continue-on-error: true
+        if: env.AGENT == 'both' || env.AGENT == 'ai-news'
         env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
-        run: node ai-news-agent.mjs
+        run: |
+          if node -e "process.exit(require('./config.json').agents['ai-news'] === false ? 1 : 0)"; then
+            node ai-news-agent.mjs
+          else
+            echo "AI news agent is disabled in config.json — skipping."
+          fi
 
       - name: Run Saudi stocks agent
         continue-on-error: true
+        if: env.AGENT == 'both' || env.AGENT == 'saudi-stocks'
         env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
-        run: node saudi-stocks-agent.mjs
+        run: |
+          if node -e "process.exit(require('./config.json').agents['saudi-stocks'] === false ? 1 : 0)"; then
+            node saudi-stocks-agent.mjs
+          else
+            echo "Saudi stocks agent is disabled in config.json — skipping."
+          fi
 
       - name: Commit reports to the repo (archive)
         run: |
@@ -54,6 +76,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add reports || true
           git diff --cached --quiet || git commit -m "Daily reports $(date -u +%F) [skip ci]"
+          git pull --rebase origin main
           git push
 
       - name: Build site
@@ -61,8 +84,6 @@ jobs:
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
-        with:
-          enablement: true
 
       - name: Upload site
         uses: actions/upload-pages-artifact@v3

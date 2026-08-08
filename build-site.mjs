@@ -121,6 +121,44 @@ body {
 /* ── Report page / footer ─────────────────── */
 .back { display:inline-block; margin:22px 0 0; font-size:.9rem; font-weight:600; text-decoration:none; color:var(--muted); }
 .back:hover { color:var(--ink); }
+
+/* ── Admin console ────────────────────────── */
+.admin-link { display:inline-flex; align-items:center; gap:6px; font-size:.8rem; font-weight:600;
+  text-decoration:none; color:var(--muted); border:1px solid var(--line); background:var(--card);
+  border-radius:999px; padding:5px 13px; }
+.admin-link:hover { color:var(--ink); border-color:var(--muted); }
+.admin-card { margin-bottom:22px; }
+.admin-card .hint { color:var(--muted); font-size:.88rem; margin:12px 0 16px; }
+.admin-card .hint a, .field .sub a { color:inherit; }
+.row { display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+.btn { appearance:none; border:1px solid var(--line); background:var(--card); color:var(--ink);
+  border-radius:9px; padding:9px 16px; font-size:.9rem; font-weight:600; cursor:pointer; }
+.btn:hover:not(:disabled) { transform:translateY(-1px); }
+.btn:disabled { opacity:.45; cursor:not-allowed; }
+.btn.primary { background:var(--ink); border-color:var(--ink); color:var(--card); }
+.btn.accent-ai { border-color:var(--ai); color:var(--ai); }
+.btn.accent-sa { border-color:var(--sa); color:var(--sa); }
+.btn.ghost { color:var(--muted); }
+.btn.small { padding:5px 12px; font-size:.8rem; }
+input[type=password], input[type=text], input[type=number] {
+  font:inherit; font-size:.92rem; padding:9px 12px; border-radius:9px;
+  border:1px solid var(--line); background:var(--bg); color:var(--ink); min-width:0; }
+input[type=password], input[type=text] { flex:1; }
+input[type=number] { width:110px; }
+.field { margin:0 0 18px; display:flex; flex-direction:column; gap:6px; }
+.field > label:first-child { font-size:.78rem; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); }
+.field .sub { font-size:.8rem; color:var(--muted); }
+label.check { display:flex; align-items:center; gap:8px; font-size:.92rem; cursor:pointer; }
+.status { font-size:.86rem; margin:14px 0 0; min-height:1.2em; color:var(--muted); }
+.status.ok { color:var(--sa); } .status.err { color:#c0392b; }
+:root[data-theme="dark"] .status.err { color:#ef7a6b; }
+.run { display:flex; align-items:center; gap:12px; padding:10px 12px; border:1px solid var(--line);
+  border-radius:9px; margin-bottom:8px; text-decoration:none; color:var(--ink); }
+.run:hover { border-color:var(--muted); }
+.run-icon { font-size:1rem; width:18px; text-align:center; }
+.run-ok .run-icon { color:var(--sa); } .run-bad .run-icon { color:#c0392b; } .run-live .run-icon { color:var(--ai); }
+.run-title { flex:1; font-size:.9rem; font-weight:600; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.run-meta { font-size:.78rem; color:var(--muted); white-space:nowrap; }
 .pagecard { margin-top:18px; }
 footer { margin-top:44px; padding-top:18px; border-top:1px solid var(--line);
   color:var(--muted); font-size:.8rem; text-align:center; }
@@ -205,7 +243,8 @@ fs.mkdirSync(path.join(SITE_DIR, 'reports'), { recursive: true });
 const masthead = `<header class="masthead">
 <p class="kicker">AI · Markets · Every Morning</p>
 <h1>The Daily Brief</h1>
-<p class="dateline">${prettyDate(new Date().toISOString().slice(0, 10))}</p>
+<p class="dateline">${prettyDate(new Date().toISOString().slice(0, 10))}
+&nbsp;·&nbsp; <a class="admin-link" href="admin.html">⚙︎ Agent console</a></p>
 </header>`;
 
 const tabButtons = AGENTS.map(a =>
@@ -244,6 +283,17 @@ fs.writeFileSync(
     extraJs: TABS_JS,
   }),
 );
+
+/* ── admin console ── */
+if (fs.existsSync('./admin-template.html')) {
+  fs.writeFileSync(
+    path.join(SITE_DIR, 'admin.html'),
+    shell({
+      title: 'Agent Console — The Daily Brief',
+      body: fs.readFileSync('./admin-template.html', 'utf8'),
+    }),
+  );
+}
 
 /* ── individual report pages ── */
 for (const f of files) {

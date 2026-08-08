@@ -1,0 +1,215 @@
+<header class="masthead">
+<p class="kicker">Control Panel</p>
+<h1>Agent Console</h1>
+<p class="dateline"><a class="back" href="index.html">← Back to briefings</a></p>
+</header>
+
+<!-- ── Connection ─────────────────────────── -->
+<section class="card admin-card" id="connect-card">
+  <div class="cardhead"><h2>🔑 Connection</h2><span class="badge" id="conn-badge">Not connected</span></div>
+  <p class="hint">
+    The console talks to GitHub directly from your browser. Paste a
+    <a href="https://github.com/settings/tokens?type=beta" target="_blank" rel="noopener">fine-grained personal access token</a>
+    with <strong>Actions: Read&nbsp;and&nbsp;write</strong> and <strong>Contents: Read&nbsp;and&nbsp;write</strong>
+    permission on this repository. It is stored only in this browser (localStorage) and is never sent anywhere except github.com.
+  </p>
+  <div class="row">
+    <input type="password" id="token" placeholder="github_pat_..." autocomplete="off" spellcheck="false">
+    <button class="btn primary" id="save-token">Connect</button>
+    <button class="btn ghost" id="forget-token">Forget</button>
+  </div>
+  <p class="status" id="conn-status"></p>
+</section>
+
+<!-- ── Run agents ─────────────────────────── -->
+<section class="card admin-card">
+  <div class="cardhead"><h2>▶︎ Run agents now</h2></div>
+  <p class="hint">Trigger a run without waiting for the daily schedule. A run takes about a minute; the site republishes automatically when it finishes.</p>
+  <div class="row">
+    <button class="btn primary" data-run="both" disabled>Run both</button>
+    <button class="btn accent-ai" data-run="ai-news" disabled>🧠 AI News only</button>
+    <button class="btn accent-sa" data-run="saudi-stocks" disabled>📈 Saudi Markets only</button>
+  </div>
+  <p class="status" id="run-status"></p>
+</section>
+
+<!-- ── Settings ───────────────────────────── -->
+<section class="card admin-card">
+  <div class="cardhead"><h2>⚙︎ Settings</h2></div>
+  <p class="hint">Saved to <code>config.json</code> in the repository and used by every future run.</p>
+  <div class="field">
+    <label for="model">Model</label>
+    <input type="text" id="model" list="model-list" placeholder="anthropic/claude-sonnet-4.5" disabled>
+    <datalist id="model-list">
+      <option value="anthropic/claude-sonnet-4.5"></option>
+      <option value="anthropic/claude-opus-4.1"></option>
+      <option value="openai/gpt-5"></option>
+      <option value="google/gemini-2.5-pro"></option>
+    </datalist>
+    <span class="sub">Any model slug from <a href="https://openrouter.ai/models" target="_blank" rel="noopener">openrouter.ai/models</a></span>
+  </div>
+  <div class="field">
+    <label for="results">Search results per run</label>
+    <input type="number" id="results" min="1" max="20" disabled>
+    <span class="sub">More results = deeper research, higher cost</span>
+  </div>
+  <div class="field">
+    <label>Active agents</label>
+    <label class="check"><input type="checkbox" id="on-ai-news" disabled> 🧠 Daily AI News</label>
+    <label class="check"><input type="checkbox" id="on-saudi-stocks" disabled> 📈 Saudi Stock Market</label>
+  </div>
+  <div class="row">
+    <button class="btn primary" id="save-config" disabled>Save settings</button>
+  </div>
+  <p class="status" id="config-status"></p>
+</section>
+
+<!-- ── Run history ────────────────────────── -->
+<section class="card admin-card">
+  <div class="cardhead"><h2>📜 Recent runs</h2><button class="btn ghost small" id="refresh-runs" disabled>Refresh</button></div>
+  <div id="runs"><p class="hint">Connect to see run history.</p></div>
+</section>
+
+<script>
+const REPO = 'engdarkbot-netizen/Ai';
+const API  = 'https://api.github.com/repos/' + REPO;
+const $    = s => document.querySelector(s);
+let token  = localStorage.getItem('gh_token') || '';
+let cfgSha = null;
+
+const setStatus = (el, msg, kind) => {
+  const n = $(el); n.textContent = msg; n.className = 'status' + (kind ? ' ' + kind : '');
+};
+const gh = async (path, opts = {}) => {
+  const res = await fetch(API + path, {
+    ...opts,
+    headers: {
+      Accept: 'application/vnd.github+json',
+      Authorization: 'Bearer ' + token,
+      ...(opts.body ? { 'Content-Type': 'application/json' } : {}),
+    },
+  });
+  if (res.status === 204) return null;
+  const data = await res.json().catch(() => null);
+  if (!res.ok) throw new Error((data && data.message) || ('HTTP ' + res.status));
+  return data;
+};
+
+function setConnected(ok, who) {
+  document.querySelectorAll('button[data-run], #model, #results, #on-ai-news, #on-saudi-stocks, #save-config, #refresh-runs')
+    .forEach(el => { el.disabled = !ok; });
+  const b = $('#conn-badge');
+  b.textContent = ok ? ('Connected' + (who ? ' · ' + who : '')) : 'Not connected';
+  b.className = 'badge ' + (ok ? 'sa' : '');
+}
+
+async function connect(quiet) {
+  if (!token) { setConnected(false); return; }
+  try {
+    const me = await gh('');           // repo metadata = permission check
+    setConnected(true, me.full_name);
+    setStatus('#conn-status', '', '');
+    await Promise.all([loadConfig(), loadRuns()]);
+  } catch (e) {
+    setConnected(false);
+    if (!quiet) setStatus('#conn-status', 'Could not connect: ' + e.message, 'err');
+  }
+}
+
+async function loadConfig() {
+  try {
+    const f = await gh('/contents/config.json');
+    cfgSha  = f.sha;
+    const c = JSON.parse(decodeURIComponent(escape(atob(f.content.replace(/\n/g, '')))));
+    $('#model').value   = c.model || '';
+    $('#results').value = c.maxSearchResults || 5;
+    $('#on-ai-news').checked      = c.agents ? c.agents['ai-news'] !== false : true;
+    $('#on-saudi-stocks').checked = c.agents ? c.agents['saudi-stocks'] !== false : true;
+  } catch (e) {
+    setStatus('#config-status', 'Could not load settings: ' + e.message, 'err');
+  }
+}
+
+async function saveConfig() {
+  const body = {
+    model: $('#model').value.trim() || 'anthropic/claude-sonnet-4.5',
+    maxSearchResults: Math.min(20, Math.max(1, Number($('#results').value) || 5)),
+    agents: {
+      'ai-news': $('#on-ai-news').checked,
+      'saudi-stocks': $('#on-saudi-stocks').checked,
+    },
+  };
+  setStatus('#config-status', 'Saving…');
+  try {
+    const res = await gh('/contents/config.json', {
+      method: 'PUT',
+      body: JSON.stringify({
+        message: 'Update agent settings from console',
+        content: btoa(unescape(encodeURIComponent(JSON.stringify(body, null, 2) + '\n'))),
+        sha: cfgSha,
+      }),
+    });
+    cfgSha = res.content.sha;
+    setStatus('#config-status', '✓ Saved — applies to the next run.', 'ok');
+  } catch (e) {
+    setStatus('#config-status', 'Save failed: ' + e.message, 'err');
+  }
+}
+
+async function runAgents(which) {
+  setStatus('#run-status', 'Starting run…');
+  try {
+    await gh('/actions/workflows/daily-news.yml/dispatches', {
+      method: 'POST',
+      body: JSON.stringify({ ref: 'main', inputs: { agent: which } }),
+    });
+    setStatus('#run-status', '✓ Run started. It takes about a minute; the page republishes when done.', 'ok');
+    setTimeout(loadRuns, 4000);
+  } catch (e) {
+    setStatus('#run-status', 'Could not start run: ' + e.message, 'err');
+  }
+}
+
+async function loadRuns() {
+  try {
+    const d = await gh('/actions/runs?per_page=8');
+    const rows = (d.workflow_runs || []).map(r => {
+      const icon = r.status !== 'completed' ? '◔'
+        : r.conclusion === 'success' ? '✓' : '✕';
+      const cls  = r.status !== 'completed' ? 'run-live'
+        : r.conclusion === 'success' ? 'run-ok' : 'run-bad';
+      const when = new Date(r.created_at).toLocaleString('en-GB',
+        { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' });
+      const label = r.status !== 'completed' ? (r.status === 'queued' ? 'queued' : 'running') : r.conclusion;
+      return '<a class="run ' + cls + '" href="' + r.html_url + '" target="_blank" rel="noopener">' +
+             '<span class="run-icon">' + icon + '</span>' +
+             '<span class="run-title">' + r.display_title + '</span>' +
+             '<span class="run-meta">' + when + ' · ' + label + '</span></a>';
+    }).join('');
+    $('#runs').innerHTML = rows || '<p class="hint">No runs yet.</p>';
+    if ((d.workflow_runs || []).some(r => r.status !== 'completed')) setTimeout(loadRuns, 8000);
+  } catch (e) {
+    $('#runs').innerHTML = '<p class="status err">Could not load runs: ' + e.message + '</p>';
+  }
+}
+
+$('#save-token').addEventListener('click', () => {
+  token = $('#token').value.trim();
+  if (!token) { setStatus('#conn-status', 'Paste a token first.', 'err'); return; }
+  localStorage.setItem('gh_token', token);
+  $('#token').value = '';
+  connect(false);
+});
+$('#forget-token').addEventListener('click', () => {
+  localStorage.removeItem('gh_token'); token = '';
+  setConnected(false);
+  setStatus('#conn-status', 'Token removed from this browser.', 'ok');
+});
+$('#save-config').addEventListener('click', saveConfig);
+$('#refresh-runs').addEventListener('click', loadRuns);
+document.querySelectorAll('button[data-run]').forEach(b =>
+  b.addEventListener('click', () => runAgents(b.dataset.run)));
+
+setConnected(false);
+if (token) connect(true);
+</script>

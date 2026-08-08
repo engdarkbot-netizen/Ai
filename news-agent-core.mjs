@@ -8,9 +8,10 @@
  * Required env vars:
  *   OPENROUTER_API_KEY - OpenRouter API key (https://openrouter.ai/keys)
  *
- * Optional env vars:
- *   NEWS_MODEL         - OpenRouter model slug (default: anthropic/claude-sonnet-4.5)
- *   MAX_SEARCH_RESULTS - Web results fed to the model per run (default: 5)
+ * Settings come from config.json (editable from the admin page); env vars
+ * override it:
+ *   NEWS_MODEL         - OpenRouter model slug
+ *   MAX_SEARCH_RESULTS - Web results fed to the model per run
  *   OUTPUT_DIR         - Where reports are written (default: ./reports)
  */
 
@@ -18,9 +19,23 @@ import OpenAI from 'openai';
 import fs from 'fs';
 import path from 'path';
 
+export function loadConfig() {
+  const defaults = {
+    model: 'anthropic/claude-sonnet-4.5',
+    maxSearchResults: 5,
+    agents: { 'ai-news': true, 'saudi-stocks': true },
+  };
+  try {
+    return { ...defaults, ...JSON.parse(fs.readFileSync('./config.json', 'utf8')) };
+  } catch {
+    return defaults;
+  }
+}
+
+const CONFIG      = loadConfig();
 const API_KEY     = process.env.OPENROUTER_API_KEY;
-const MODEL       = process.env.NEWS_MODEL || 'anthropic/claude-sonnet-4.5';
-const MAX_RESULTS = Number(process.env.MAX_SEARCH_RESULTS || 5);
+const MODEL       = process.env.NEWS_MODEL || CONFIG.model;
+const MAX_RESULTS = Number(process.env.MAX_SEARCH_RESULTS || CONFIG.maxSearchResults);
 const OUTPUT_DIR  = process.env.OUTPUT_DIR || './reports';
 
 const LINE = '─'.repeat(64);
