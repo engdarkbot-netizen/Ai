@@ -1,6 +1,7 @@
 {
   "model": "anthropic/claude-sonnet-4.5",
-  "maxSearchResults": 5,
+  "maxSearchResults": 8,
+  "verify": true,
   "agents": {
     "ai-news": true,
     "saudi-stocks": true

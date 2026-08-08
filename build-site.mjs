@@ -56,25 +56,37 @@ body {
 
 /* ── Reading progress ─────────────────────── */
 #progress { position:fixed; inset:0 auto auto 0; height:3px; width:0;
-  background:linear-gradient(90deg, var(--ai), var(--sa)); z-index:60; transition:width .1s linear; }
+  background:linear-gradient(90deg, var(--ai), var(--sa)); z-index:60; }
 
 /* ── Hero ─────────────────────────────────── */
-.hero { position:relative; overflow:hidden; padding:74px 20px 56px; text-align:center;
+.hero { position:relative; overflow:hidden; padding:78px 20px 58px; text-align:center;
   border-bottom:1px solid var(--line);
   background:linear-gradient(180deg, var(--bg-2) 0%, var(--bg) 100%); }
-.hero::before, .hero::after {
-  content:''; position:absolute; border-radius:50%; filter:blur(70px); opacity:.5;
-  pointer-events:none; animation:drift 22s ease-in-out infinite alternate;
-}
-.hero::before { width:440px; height:440px; top:-190px; left:calc(50% - 400px);
+.blob { position:absolute; border-radius:50%; filter:blur(70px); opacity:.5;
+  pointer-events:none; animation:drift 20s ease-in-out infinite alternate;
+  will-change:transform; }
+.blob.b1 { width:460px; height:460px; top:-200px; left:calc(50% - 420px);
   background:radial-gradient(circle, var(--ai-2), transparent 68%); }
-.hero::after  { width:400px; height:400px; top:-160px; left:calc(50% + 60px);
-  background:radial-gradient(circle, var(--sa-2), transparent 68%); animation-delay:-8s; }
-:root[data-theme="dark"] .hero::before, :root[data-theme="dark"] .hero::after { opacity:.34; }
-@keyframes drift { from { transform:translate3d(-26px,0,0) scale(1); }
-                   to   { transform:translate3d(26px,18px,0) scale(1.14); } }
-@media (prefers-reduced-motion:reduce) { .hero::before, .hero::after { animation:none; } }
+.blob.b2 { width:420px; height:420px; top:-170px; left:calc(50% + 40px);
+  background:radial-gradient(circle, var(--sa-2), transparent 68%); animation-delay:-9s; }
+.blob.b3 { width:280px; height:280px; bottom:-160px; left:calc(50% - 140px);
+  background:radial-gradient(circle, var(--ai), transparent 70%); opacity:.22; animation-delay:-4s; }
+:root[data-theme="dark"] .blob { opacity:.32; }
+:root[data-theme="dark"] .blob.b3 { opacity:.16; }
+@keyframes drift { from { transform:translate3d(-30px,0,0) scale(1); }
+                   to   { transform:translate3d(30px,22px,0) scale(1.16); } }
 .hero-inner { position:relative; z-index:1; max-width:860px; margin:0 auto; }
+.hero-inner > * { opacity:0; animation:heroIn .8s cubic-bezier(.22,1,.36,1) forwards; }
+.hero-inner > :nth-child(1) { animation-delay:.05s; }
+.hero-inner > :nth-child(2) { animation-delay:.15s; }
+.hero-inner > :nth-child(3) { animation-delay:.3s; }
+.hero-inner > :nth-child(4) { animation-delay:.42s; }
+.hero-inner > :nth-child(5) { animation-delay:.54s; }
+@keyframes heroIn { from { opacity:0; transform:translateY(22px); } to { opacity:1; transform:none; } }
+@media (prefers-reduced-motion:reduce) {
+  .blob { animation:none; }
+  .hero-inner > * { animation:none; opacity:1; }
+}
 .kicker { font:600 .7rem/1 'Inter', sans-serif; letter-spacing:.32em; text-transform:uppercase;
   color:var(--muted); margin:0 0 16px; }
 .hero h1 { margin:0; font-family:'Fraunces', Georgia, serif; font-weight:600;
@@ -82,11 +94,17 @@ body {
   background:linear-gradient(135deg, var(--ink) 30%, var(--ai) 130%);
   -webkit-background-clip:text; background-clip:text; color:transparent; }
 .dateline { color:var(--muted); font-size:.9rem; margin:16px 0 0; }
+.live-dot { display:inline-block; width:7px; height:7px; border-radius:50%;
+  background:var(--sa-2); margin:0 7px 1px 0; animation:pulse 2.2s ease-out infinite; }
+@keyframes pulse { 0% { box-shadow:0 0 0 0 color-mix(in srgb, var(--sa-2) 55%, transparent); }
+  70% { box-shadow:0 0 0 9px transparent; } 100% { box-shadow:0 0 0 0 transparent; } }
 .stats { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin:26px 0 0; }
 .stat { display:flex; align-items:baseline; gap:7px; background:var(--glass);
   border:1px solid var(--line); border-radius:999px; padding:7px 15px;
-  backdrop-filter:blur(10px); box-shadow:var(--shadow-s); }
-.stat b { font:700 .95rem 'Inter', sans-serif; }
+  backdrop-filter:blur(10px); box-shadow:var(--shadow-s);
+  transition:transform .2s ease, box-shadow .2s ease; }
+.stat:hover { transform:translateY(-2px); box-shadow:var(--shadow-m); }
+.stat b { font:700 .95rem 'Inter', sans-serif; font-variant-numeric:tabular-nums; }
 .stat span { font-size:.76rem; color:var(--muted); letter-spacing:.04em; text-transform:uppercase; }
 .hero-actions { margin:22px 0 0; }
 
@@ -112,24 +130,37 @@ body {
   border:1px solid var(--line); border-radius:999px; box-shadow:var(--shadow-s); }
 .tab { appearance:none; border:0; background:transparent; color:var(--ink-2); cursor:pointer;
   border-radius:999px; padding:10px 22px; font:600 .92rem 'Inter', sans-serif;
-  display:flex; align-items:center; gap:8px; white-space:nowrap; transition:.2s ease; }
+  display:flex; align-items:center; gap:8px; white-space:nowrap;
+  transition:color .2s ease, background .3s cubic-bezier(.22,1,.36,1), box-shadow .3s ease,
+  transform .15s ease; }
 .tab:hover { color:var(--ink); }
+.tab:active { transform:scale(.96); }
 .tab.active { color:#fff; box-shadow:var(--shadow-s); }
 .tab[data-accent="ai"].active { background:linear-gradient(135deg, var(--ai), var(--ai-2)); }
 .tab[data-accent="sa"].active { background:linear-gradient(135deg, var(--sa), var(--sa-2)); }
 :root[data-theme="dark"] .tab.active { color:#14130f; }
 .panel { display:none; }
-.panel.active { display:block; animation:rise .4s cubic-bezier(.22,1,.36,1); }
-@keyframes rise { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:none; } }
+.panel.active { display:block; animation:rise .45s cubic-bezier(.22,1,.36,1); }
+@keyframes rise { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
+
+/* ── Scroll reveal ────────────────────────── */
+.reveal { opacity:0; transform:translateY(20px);
+  transition:opacity .65s ease, transform .65s cubic-bezier(.22,1,.36,1); }
+.reveal.in { opacity:1; transform:none; }
+@media (prefers-reduced-motion:reduce) { .reveal { opacity:1; transform:none; transition:none; } }
 
 /* ── Cards ────────────────────────────────── */
 .card { position:relative; background:var(--card); border:1px solid var(--line);
   border-radius:var(--radius); padding:34px 38px; box-shadow:var(--shadow-m); overflow:hidden; }
-.card::before { content:''; position:absolute; inset:0 0 auto 0; height:3px; }
-.panel-ai .card::before, .page-ai .card::before { background:linear-gradient(90deg, var(--ai), var(--ai-2)); }
-.panel-sa .card::before, .page-sa .card::before { background:linear-gradient(90deg, var(--sa), var(--sa-2)); }
+.card::before { content:''; position:absolute; inset:0 0 auto 0; height:3px;
+  background-size:220% 100%; animation:sheen 7s linear infinite; }
+@keyframes sheen { from { background-position:0% 0; } to { background-position:220% 0; } }
+.panel-ai .card::before, .page-ai .card::before {
+  background-image:linear-gradient(90deg, var(--ai), var(--ai-2), var(--ai)); }
+.panel-sa .card::before, .page-sa .card::before {
+  background-image:linear-gradient(90deg, var(--sa), var(--sa-2), var(--sa)); }
 .cardhead { display:flex; align-items:center; justify-content:space-between; gap:14px;
-  flex-wrap:wrap; padding-bottom:18px; margin-bottom:10px; border-bottom:1px solid var(--line); }
+  flex-wrap:wrap; padding-bottom:14px; }
 .cardhead h2 { margin:0; font-family:'Fraunces', Georgia, serif; font-weight:600;
   font-size:1.5rem; letter-spacing:-.015em; }
 .badge { font:700 .68rem 'Inter', sans-serif; letter-spacing:.1em; text-transform:uppercase;
@@ -138,10 +169,19 @@ body {
 .badge.ai { background:var(--ai-soft); color:var(--ai); border-color:transparent; }
 .badge.sa { background:var(--sa-soft); color:var(--sa); border-color:transparent; }
 
+/* ── Provenance strip ─────────────────────── */
+.prov { display:flex; gap:8px; flex-wrap:wrap; align-items:center;
+  padding:0 0 18px; margin-bottom:8px; border-bottom:1px solid var(--line); }
+.prov .chip { display:inline-flex; align-items:center; gap:6px;
+  font:600 .74rem 'Inter', sans-serif; color:var(--muted);
+  background:var(--bg-2); border:1px solid var(--line); border-radius:999px; padding:5px 12px; }
+.prov .chip.ok { color:var(--sa); background:var(--sa-soft); border-color:transparent; }
+.prov .chip code { font:600 .74rem ui-monospace, Menlo, monospace; color:var(--ink-2); }
+
 /* ── Report typography ────────────────────── */
 .report { font-family:'Newsreader', Georgia, serif; font-size:1.09rem; line-height:1.72; color:var(--ink-2); }
-.report h1 { display:none; } /* the card header already carries the title */
-.report h1, .report h2, .report h3 { font-family:'Fraunces', Georgia, serif; color:var(--ink);
+.report h1 { display:none; }
+.report h2, .report h3 { font-family:'Fraunces', Georgia, serif; color:var(--ink);
   line-height:1.22; letter-spacing:-.018em; }
 .report h2 { font-size:1.32rem; margin:2.1em 0 .6em; padding-top:1.2em; border-top:1px solid var(--line);
   display:flex; align-items:baseline; gap:11px; }
@@ -154,7 +194,6 @@ body {
 .report li { margin:.5em 0; }
 .report li::marker { color:var(--muted); }
 .report strong { font-weight:600; color:var(--ink); }
-.report em { font-style:italic; }
 .report hr { border:0; height:1px; background:var(--line); margin:2.4em 0; }
 .report blockquote { margin:1.4em 0; padding:.6em 1.4em; border-inline-start:3px solid var(--line-2);
   color:var(--muted); font-style:italic; }
@@ -168,6 +207,7 @@ body {
 .report tr:last-child td { border-bottom:0; }
 .report th { background:var(--bg-2); font-weight:600; color:var(--ink);
   font-size:.76rem; letter-spacing:.06em; text-transform:uppercase; }
+.report tbody tr { transition:background .15s ease; }
 .report tbody tr:hover td { background:var(--bg-2); }
 .report a { text-decoration:none; font-weight:500;
   background-image:linear-gradient(currentColor, currentColor);
@@ -177,21 +217,34 @@ body {
 .panel-ai .report a, .page-ai .report a { color:var(--ai); }
 .panel-sa .report a, .page-sa .report a { color:var(--sa); }
 
+/* ── Sources ──────────────────────────────── */
+.sources { margin-top:30px; padding-top:22px; border-top:1px solid var(--line); }
+.sources h3, .archive h3 { font:600 .72rem 'Inter', sans-serif; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--muted); margin:0 0 14px; }
+.src-grid { display:flex; flex-wrap:wrap; gap:8px; }
+.src-grid a { display:inline-flex; align-items:center; gap:7px; text-decoration:none;
+  color:var(--ink-2); background:var(--bg-2); border:1px solid var(--line);
+  border-radius:999px; padding:6px 13px; font:500 .8rem 'Inter', sans-serif;
+  transition:.18s ease; }
+.src-grid a b { font-weight:700; font-size:.72rem; color:var(--muted); }
+.src-grid a:hover { transform:translateY(-2px); box-shadow:var(--shadow-s); }
+.panel-ai .src-grid a:hover, .page-ai .src-grid a:hover { border-color:var(--ai); color:var(--ai); }
+.panel-sa .src-grid a:hover, .page-sa .src-grid a:hover { border-color:var(--sa); color:var(--sa); }
+
 /* ── Archive ──────────────────────────────── */
-.archive { margin-top:34px; padding-top:24px; border-top:1px solid var(--line); }
-.archive h3 { font:600 .72rem 'Inter', sans-serif; letter-spacing:.2em; text-transform:uppercase;
-  color:var(--muted); margin:0 0 14px; }
+.archive { margin-top:30px; padding-top:22px; border-top:1px solid var(--line); }
 .archive-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(132px, 1fr)); gap:9px; }
 .archive-grid a { text-decoration:none; color:var(--ink); background:var(--bg-2);
   border:1px solid var(--line); border-radius:11px; padding:11px 14px;
   font:600 .86rem 'Inter', sans-serif; transition:.18s ease; }
-.archive-grid a:hover { transform:translateY(-2px); box-shadow:var(--shadow-s); }
+.archive-grid a:hover { transform:translateY(-2px) scale(1.02); box-shadow:var(--shadow-s); }
 .panel-ai .archive-grid a:hover { border-color:var(--ai); color:var(--ai); }
 .panel-sa .archive-grid a:hover { border-color:var(--sa); color:var(--sa); }
 .empty { color:var(--muted); font-style:italic; }
 
 /* ── Console ──────────────────────────────── */
 .admin-card { margin-bottom:22px; }
+.admin-card::before { background-image:linear-gradient(90deg, var(--ai), var(--sa), var(--ai)); }
 .admin-card .hint { color:var(--muted); font-size:.89rem; margin:14px 0 18px; line-height:1.6; }
 .admin-card .hint a, .field .sub a { color:inherit; text-decoration:underline; text-underline-offset:2px; }
 .row { display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
@@ -199,6 +252,7 @@ body {
   border-radius:11px; padding:10px 18px; font:600 .9rem 'Inter', sans-serif; cursor:pointer;
   transition:.18s ease; }
 .btn:hover:not(:disabled) { transform:translateY(-1px); box-shadow:var(--shadow-s); }
+.btn:active:not(:disabled) { transform:scale(.97); }
 .btn:disabled { opacity:.42; cursor:not-allowed; }
 .btn.primary { background:linear-gradient(135deg, var(--ink), var(--ink-2));
   border-color:transparent; color:var(--card); }
@@ -227,6 +281,8 @@ label.check input { width:17px; height:17px; accent-color:var(--sa); }
 .run:hover { border-color:var(--line-2); transform:translateX(2px); }
 .run-icon { font-size:1rem; width:20px; text-align:center; }
 .run-ok .run-icon { color:var(--sa); } .run-bad .run-icon { color:#c0392b; } .run-live .run-icon { color:var(--ai); }
+.run-live .run-icon { animation:spin 1.2s linear infinite; display:inline-block; }
+@keyframes spin { to { transform:rotate(360deg); } }
 .run-title { flex:1; font:600 .9rem 'Inter', sans-serif; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
 .run-meta { font-size:.78rem; color:var(--muted); white-space:nowrap; }
 
@@ -241,6 +297,7 @@ footer a { color:inherit; }
   cursor:pointer; backdrop-filter:blur(10px); box-shadow:var(--shadow-s);
   opacity:0; pointer-events:none; transition:.25s ease; }
 #totop.show { opacity:1; pointer-events:auto; }
+#totop:hover { transform:translateY(-3px); }
 @media (max-width:600px) {
   .card { padding:24px 20px; border-radius:15px; }
   .hero { padding:60px 18px 44px; }
@@ -270,14 +327,40 @@ addEventListener('DOMContentLoaded', function(){
       sync();
     });
   }
+
   var bar = document.getElementById('progress'), top = document.getElementById('totop');
+  var blobs = [].slice.call(document.querySelectorAll('.blob'));
+  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   var onScroll = function(){
     var h = document.documentElement.scrollHeight - innerHeight;
     if (bar) bar.style.width = (h > 0 ? (scrollY / h) * 100 : 0) + '%';
     if (top) top.classList.toggle('show', scrollY > 600);
+    if (!reduced) blobs.forEach(function(b, i){
+      b.style.translate = '0 ' + (scrollY * (i % 2 ? .18 : .3)) + 'px';
+    });
   };
   addEventListener('scroll', onScroll, { passive:true }); onScroll();
   if (top) top.addEventListener('click', function(){ scrollTo({ top:0, behavior:'smooth' }); });
+
+  // Scroll reveal
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { rootMargin:'0px 0px -8% 0px' });
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+
+  // Count-up stats
+  document.querySelectorAll('.stat b[data-n]').forEach(function(el){
+    var n = Number(el.dataset.n); if (!isFinite(n)) return;
+    if (reduced) { el.textContent = n; return; }
+    var t0 = null;
+    var step = function(ts){
+      if (!t0) t0 = ts;
+      var p = Math.min((ts - t0) / 900, 1);
+      el.textContent = Math.round(n * (1 - Math.pow(1 - p, 3)));
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  });
 });
 `;
 
@@ -304,7 +387,7 @@ function shell({ title, hero = '', body, bodyClass = '', extraJs = '' }) {
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Daily AI industry and Saudi stock market briefings, researched and written automatically every morning.">
+<meta name="description" content="Daily AI industry and Saudi stock market briefings — researched, fact-checked, and published automatically every morning.">
 <meta name="color-scheme" content="light dark">
 <title>${title}</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -320,7 +403,9 @@ function shell({ title, hero = '', body, bodyClass = '', extraJs = '' }) {
 ${hero}
 <div class="wrap">
 ${body}
-<footer>Researched and written automatically every morning at 07:00 Riyadh time<br>
+<footer>Each briefing is researched with live web search, then fact-checked in a second
+verification pass before publishing — every claim links to its source.<br>
+Runs automatically every morning at 07:00 Riyadh time ·
 <a href="https://github.com/engdarkbot-netizen/Ai" rel="noopener">source on GitHub</a> ·
 last updated ${new Date().toISOString().slice(0, 16).replace('T', ' ')} UTC</footer>
 </div>
@@ -331,30 +416,80 @@ ${extraJs ? `<script>${extraJs}</script>` : ''}
 </html>`;
 }
 
+/* ── Report parsing helpers ── */
 const dateOf = (file, slug) => file.slice(slug.length + 1, -3);
 const prettyDate = iso =>
   new Date(iso + 'T00:00:00Z').toLocaleDateString('en-GB', {
     weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC',
   });
 
+function parseReport(md) {
+  let meta = null;
+  const m = md.match(/<!-- meta: (.*?) -->/);
+  if (m) {
+    meta = Object.fromEntries(m[1].split(' ').map(kv => kv.split('=')));
+    md = md.replace(m[0], '');
+  }
+  const domains = new Map(); // hostname -> { url, count }
+  for (const link of md.matchAll(/\]\((https?:\/\/[^)\s]+)\)/g)) {
+    try {
+      const host = new URL(link[1]).hostname.replace(/^www\./, '');
+      const e = domains.get(host) || { url: link[1], count: 0 };
+      e.count++;
+      domains.set(host, e);
+    } catch { /* ignore malformed URLs */ }
+  }
+  return { md, meta, domains };
+}
+
+function provenanceHtml(meta, domains, accent) {
+  const chips = [];
+  if (meta?.verified === 'yes') chips.push(`<span class="chip ok">✓ Fact-checked</span>`);
+  chips.push(`<span class="chip">🔗 ${domains.size} sources</span>`);
+  if (meta?.model) chips.push(`<span class="chip">🤖 <code>${meta.model}</code></span>`);
+  if (meta?.generated) {
+    const t = meta.generated.slice(11, 16);
+    chips.push(`<span class="chip">🕐 ${t} UTC</span>`);
+  }
+  return `<div class="prov">${chips.join('')}</div>`;
+}
+
+function sourcesHtml(domains) {
+  if (!domains.size) return '';
+  const items = [...domains.entries()]
+    .sort((a, b) => b[1].count - a[1].count)
+    .map(([host, { url, count }]) =>
+      `<a href="${url}" target="_blank" rel="noopener">${host}${count > 1 ? ` <b>×${count}</b>` : ''}</a>`
+    ).join('');
+  return `<div class="sources reveal"><h3>Sources in this briefing</h3><div class="src-grid">${items}</div></div>`;
+}
+
+/* ── Build ── */
 const files = fs.existsSync(REPORTS_DIR) ? fs.readdirSync(REPORTS_DIR).filter(f => f.endsWith('.md')) : [];
 
 fs.rmSync(SITE_DIR, { recursive: true, force: true });
 fs.mkdirSync(path.join(SITE_DIR, 'reports'), { recursive: true });
 
-/* ── index.html ── */
+const BLOBS = `<div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>`;
+
+/* index.html */
+const allDomains = new Set();
+for (const f of files) {
+  for (const host of parseReport(fs.readFileSync(path.join(REPORTS_DIR, f), 'utf8')).domains.keys())
+    allDomains.add(host);
+}
 const days = new Set(files.map(f => f.slice(-13, -3))).size;
 const stats = `<div class="stats">
-<div class="stat"><b>2</b><span>Agents</span></div>
-<div class="stat"><b>${files.length}</b><span>Briefings</span></div>
-<div class="stat"><b>${days}</b><span>Days covered</span></div>
-<div class="stat"><b>Daily</b><span>07:00 AST</span></div>
+<div class="stat"><b data-n="${files.length}">0</b><span>Briefings</span></div>
+<div class="stat"><b data-n="${days}">0</b><span>Days</span></div>
+<div class="stat"><b data-n="${allDomains.size}">0</b><span>Sources cited</span></div>
+<div class="stat"><b>07:00</b><span>Daily · AST</span></div>
 </div>`;
 
-const heroIndex = `<header class="hero"><div class="hero-inner">
+const heroIndex = `<header class="hero">${BLOBS}<div class="hero-inner">
 <p class="kicker">Artificial Intelligence · Saudi Markets</p>
 <h1>The Daily Brief</h1>
-<p class="dateline">${prettyDate(new Date().toISOString().slice(0, 10))}</p>
+<p class="dateline"><span class="live-dot"></span>${prettyDate(new Date().toISOString().slice(0, 10))} — researched &amp; fact-checked automatically</p>
 ${stats}
 <p class="hero-actions"><a class="admin-link" href="admin.html">⚙︎ Agent console</a></p>
 </div></header>`;
@@ -371,14 +506,16 @@ for (const a of AGENTS) {
     inner = `<p class="empty">No briefings yet — the first one appears after the next scheduled run.</p>`;
   } else {
     const latest = reports[0];
-    const md = fs.readFileSync(path.join(REPORTS_DIR, latest), 'utf8');
+    const { md, meta, domains } = parseReport(fs.readFileSync(path.join(REPORTS_DIR, latest), 'utf8'));
     inner = `<div class="cardhead">
 <h2>${a.longTitle}</h2>
 <span class="badge ${a.accent}">${prettyDate(dateOf(latest, a.slug))}</span>
 </div>
-<div class="report">${marked.parse(md)}</div>`;
+${provenanceHtml(meta, domains, a.accent)}
+<div class="report">${marked.parse(md)}</div>
+${sourcesHtml(domains)}`;
     if (reports.length > 1) {
-      inner += `<div class="archive"><h3>Previous briefings</h3><div class="archive-grid">` +
+      inner += `<div class="archive reveal"><h3>Previous briefings</h3><div class="archive-grid">` +
         reports.slice(1).map(r =>
           `<a href="reports/${r.replace(/\.md$/, '.html')}">${dateOf(r, a.slug)}</a>`
         ).join('') + `</div></div>`;
@@ -397,9 +534,9 @@ fs.writeFileSync(
   }),
 );
 
-/* ── admin console ── */
+/* admin console */
 if (fs.existsSync('./admin-template.html')) {
-  const heroAdmin = `<header class="hero"><div class="hero-inner">
+  const heroAdmin = `<header class="hero">${BLOBS}<div class="hero-inner">
 <p class="kicker">Control Panel</p>
 <h1>Agent Console</h1>
 <p class="dateline">Run the agents, tune their settings, watch every run</p>
@@ -415,13 +552,13 @@ if (fs.existsSync('./admin-template.html')) {
   );
 }
 
-/* ── individual report pages ── */
+/* individual report pages */
 for (const f of files) {
   const agent = AGENTS.find(a => f.startsWith(`${a.slug}-`));
   if (!agent) continue;
-  const md = fs.readFileSync(path.join(REPORTS_DIR, f), 'utf8');
+  const { md, meta, domains } = parseReport(fs.readFileSync(path.join(REPORTS_DIR, f), 'utf8'));
   const date = dateOf(f, agent.slug);
-  const hero = `<header class="hero"><div class="hero-inner">
+  const hero = `<header class="hero">${BLOBS}<div class="hero-inner">
 <p class="kicker">${agent.emoji} Archive</p>
 <h1>${agent.title}</h1>
 <p class="dateline">${prettyDate(date)}</p>
@@ -429,7 +566,9 @@ for (const f of files) {
 </div></header>`;
   const body = `<section class="panel panel-${agent.accent} active pagecard"><div class="card">
 <div class="cardhead"><h2>${agent.longTitle}</h2><span class="badge ${agent.accent}">${prettyDate(date)}</span></div>
+${provenanceHtml(meta, domains, agent.accent)}
 <div class="report">${marked.parse(md)}</div>
+${sourcesHtml(domains)}
 </div></section>`;
   fs.writeFileSync(
     path.join(SITE_DIR, 'reports', f.replace(/\.md$/, '.html')),
@@ -437,4 +576,4 @@ for (const f of files) {
   );
 }
 
-console.log(`Site built: ${SITE_DIR} (${files.length} report(s))`);
+console.log(`Site built: ${SITE_DIR} (${files.length} report(s), ${allDomains.size} distinct source domains)`);

@@ -43,9 +43,13 @@
     <span class="sub">Any model slug from <a href="https://openrouter.ai/models" target="_blank" rel="noopener">openrouter.ai/models</a></span>
   </div>
   <div class="field">
-    <label for="results">Search results per run</label>
+    <label for="results">Search results per pass</label>
     <input type="number" id="results" min="1" max="20" disabled>
     <span class="sub">More results = deeper research, higher cost</span>
+  </div>
+  <div class="field">
+    <label class="check"><input type="checkbox" id="on-verify" disabled> ✓ Fact-check pass</label>
+    <span class="sub">Runs a second pass with fresh searches to verify claims, catch missed stories, and cut anything unsourced. Roughly doubles cost per run.</span>
   </div>
   <div class="field">
     <label>Active agents</label>
@@ -90,7 +94,7 @@ const gh = async (path, opts = {}) => {
 };
 
 function setConnected(ok, who) {
-  document.querySelectorAll('button[data-run], #model, #results, #on-ai-news, #on-saudi-stocks, #save-config, #refresh-runs')
+  document.querySelectorAll('button[data-run], #model, #results, #on-verify, #on-ai-news, #on-saudi-stocks, #save-config, #refresh-runs')
     .forEach(el => { el.disabled = !ok; });
   const b = $('#conn-badge');
   b.textContent = ok ? ('Connected' + (who ? ' · ' + who : '')) : 'Not connected';
@@ -116,7 +120,8 @@ async function loadConfig() {
     cfgSha  = f.sha;
     const c = JSON.parse(decodeURIComponent(escape(atob(f.content.replace(/\n/g, '')))));
     $('#model').value   = c.model || '';
-    $('#results').value = c.maxSearchResults || 5;
+    $('#results').value = c.maxSearchResults || 8;
+    $('#on-verify').checked       = c.verify !== false;
     $('#on-ai-news').checked      = c.agents ? c.agents['ai-news'] !== false : true;
     $('#on-saudi-stocks').checked = c.agents ? c.agents['saudi-stocks'] !== false : true;
   } catch (e) {
@@ -127,7 +132,8 @@ async function loadConfig() {
 async function saveConfig() {
   const body = {
     model: $('#model').value.trim() || 'anthropic/claude-sonnet-4.5',
-    maxSearchResults: Math.min(20, Math.max(1, Number($('#results').value) || 5)),
+    maxSearchResults: Math.min(20, Math.max(1, Number($('#results').value) || 8)),
+    verify: $('#on-verify').checked,
     agents: {
       'ai-news': $('#on-ai-news').checked,
       'saudi-stocks': $('#on-saudi-stocks').checked,
