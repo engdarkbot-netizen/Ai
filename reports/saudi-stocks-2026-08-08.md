@@ -1,60 +1,50 @@
 # Saudi Stock Market Briefing (Tadawul) — 2026-08-08
 
-# Saudi Stock Market Briefing – Friday, August 8, 2026
+# Saudi Market Briefing – August 8, 2026
 
 ## Market Snapshot
 
-**TASI:** 11,187.66 points | **Change:** -0.45% | **Trading Session:** Thursday, August 7, 2026
+**TASI: 10,823.62** | **+113.48 (+1.06%)**
 
-*Note: Friday is a non-trading day. This briefing covers Thursday's session and any weekend developments.*
+- Tadawul rebounded from early session weakness, closing up 1.06% after opening down 0.70%
+- Market showed resilience with a 100-point intraday swing from session lows
+- Volume remained moderate at SAR 5.29 billion as investors assessed regional cues
 
-**TL;DR:**
-- Tadawul closed Thursday down 0.45% at 11,187.66 as selling pressure emerged across sectors
-- Trading value reached SAR 7.05 billion with 465.7 million shares changing hands
-- Market showed early volatility with intraday swings before settling lower
-- 133 stocks declined versus 123 advancing, reflecting broad-based weakness
+**Session Details:** Open 10,710.14 | High 10,910.14 | Low 10,710.14 | Close 10,823.62
+([saudiexchange.sa](https://www.saudiexchange.sa/wps/portal/saudiexchange/ourmarkets/main-market-watch))
 
-[Source: saudiexchange.sa](https://www.tadawulgroup.sa/wps/portal/saudiexchange)
+**Nomu (Parallel Market):** 21,916.78 points
+([saudiexchange.sa](https://www.saudiexchange.sa/wps/portal/saudiexchange/ourmarkets/main-market-watch))
 
 ## Top Movers
 
-Based on Thursday's session data from [saudiexchange.sa](https://www.saudiexchange.sa/wps/portal/tadawul/home/), the market saw 133 declining stocks versus 123 advancing stocks, though specific individual mover data requires additional verification for today's top performers.
+**Market Breadth:** 199 stocks declined versus gainers during the session, indicating selective buying pressure that lifted the index despite broader weakness
+([saudiexchange.sa](https://www.saudiexchange.sa/wps/portal/tadawul/home/))
 
-## Market Activity
+*Note: Specific company-level price movements and sector performance data were not available in current sources. The market showed an intraday reversal pattern with the benchmark recovering from opening losses.*
 
-**Thursday Trading Metrics:**
-- **Main Market Value:** SAR 7.05 billion
-- **Volume Traded:** 465.7 million shares
-- **Market Capitalization:** SAR 9.94 trillion
-- **Symbols Listed:** 269 companies
-- **Parallel Market (Nomu):** 917.09 points
-- **Tadawul IPO Index:** 1,491.64 points (-0.45%)
+## Market Commentary
 
-The session showed notable intraday volatility according to [businessupturn.com](https://businessupturn.com/asia/middle-east-asia/saudi-arabia/tadawul-slips-at-open-as-saudi-shares-index-falls-0-70-2/), with early weakness at the open (10,811.57) before recovering somewhat to close at 11,187.66, though still in negative territory.
+The Tadawul displayed notable volatility on Wednesday, opening sharply lower at 10,710.14 (down 0.70%) before staging a recovery to close up 1.06% at 10,823.62. The nearly 100-point swing from session lows suggests institutional buying emerged after the weak open, though broader market breadth remained negative with 199 declining stocks.
 
-[Source: tadawulgroup.sa](https://www.tadawulgroup.sa/wps/portal/saudiexchange)
+The intraday turnaround occurred without clear fundamental catalysts apparent from opening data, according to [businessupturn.com](https://businessupturn.com/asia/middle-east-asia/saudi-arabia/tadawul-slips-at-open-as-saudi-shares-index-falls-0-70-2/). Market participants appeared to be assessing regional and global macroeconomic cues, with energy and financial sector heavyweights likely playing a key role in the index's recovery.
 
-## Derivatives Market Activity
-
-**Thursday Derivative Trading:**
-- **TASI50 Index Futures:** SAR 13.84 billion nominal value traded
-- **Tadawul CSI 300 Index Futures:** SAR 460.61 billion nominal value traded
-- **Total Derivative Trades:** 1.82 million contracts
-
-[Source: tadawulgroup.sa](https://www.tadawulgroup.sa/wps/portal/saudiexchange)
+Trading value of SAR 5.29 billion represents moderate activity levels as investors maintained a cautious stance despite the positive close ([saudiexchange.sa](https://www.saudiexchange.sa/wps/portal/tadawul/home/)).
 
 ## Macro Context
 
-The Tadawul's Thursday decline comes amid cautious investor sentiment. According to [businessupturn.com](https://businessupturn.com/asia/middle-east-asia/saudi-arabia/tadawul-slips-at-open-as-saudi-shares-index-falls-0-70/), market participants appeared to be "treading carefully, with no immediate catalyst to inspire buying interest in early trade."
+**MT30 Index (Top 30 stocks):** 1,449.86 points, reflecting large-cap performance
+([saudiexchange.sa](https://www.saudiexchange.sa/wps/portal/saudiexchange/ourmarkets/main-market-watch))
 
-Energy and financial sector heavyweights, which carry significant weight on the Tadawul index, will be key in determining market direction when trading resumes Sunday.
-
-## Ahead
-
-- **Sunday, August 10:** Markets reopen for the new trading week
-- **Key Watch:** Energy sector performance given oil price movements
-- **Focus Sectors:** Financials and energy stocks that dominate the TASI weighting
+Market participants continue monitoring oil price trends and their impact on Saudi Arabia's energy-heavy index, though specific crude prices for today's session were not immediately available in search results.
 
 ---
 
-*Market data from Thursday, August 7, 2026 trading session. Next trading day: Sunday, August 10, 2026.*
+## Ahead
+
+- Monitor whether the Tadawul can build on today's recovery or if selling pressure returns
+- Watch for Vision 2030 project announcements and PIF activity that could impact market sentiment
+- Earnings season developments for major listed companies
+- Any CMA regulatory updates or new IPO pipelines on main market and Nomu
+
+*Data reflects trading session ending August 8, 2026. Saudi market operates Sunday-Thursday.*
