@@ -228,6 +228,54 @@ body {
 .panel-ai .report a, .page-ai .report a { color:var(--ai); }
 .panel-sa .report a, .page-sa .report a { color:var(--sa); }
 
+/* ── Section eyebrows & spacing ───────────── */
+.section { scroll-margin-top:calc(var(--nav-h) + 90px); }
+.section-eyebrow { display:flex; align-items:center; gap:12px; margin:2.6em 0 1.1em; }
+.section:first-child .section-eyebrow { margin-top:.2em; }
+.eyebrow-badge { flex:none; width:34px; height:34px; border-radius:50%; display:flex;
+  align-items:center; justify-content:center; font-size:1.02rem; background:var(--bg-2); border:1px solid var(--line); }
+.eyebrow-label { font:700 .78rem -apple-system, sans-serif; letter-spacing:.1em; text-transform:uppercase; color:var(--ink); white-space:nowrap; }
+.eyebrow-rule { flex:1; height:1px; background:var(--line); }
+.report h3 .ic { display:inline-block; margin-inline-end:8px; }
+
+/* ── Reading meta / jump chips ────────────── */
+.readmeta { color:var(--muted); font-size:.85rem; margin:2px 0 0; }
+.jump-chips { display:flex; flex-wrap:wrap; gap:8px; margin:18px 0 4px; }
+.jump-chips a { text-decoration:none; display:inline-flex; align-items:center; gap:6px;
+  font:600 .8rem -apple-system, sans-serif; color:var(--ink-2); background:var(--bg-2);
+  border:1px solid var(--line); border-radius:999px; padding:6px 13px; transition:transform .18s ease, border-color .18s ease; }
+.jump-chips a:hover { transform:translateY(-2px); border-color:var(--line-2); }
+
+/* ── Stat callout ─────────────────────────── */
+.stat-callout { display:flex; align-items:baseline; gap:14px; margin:6px 0 1.6em; }
+.stat-callout .num { font-size:clamp(2.1rem, 6vw, 3.1rem); font-weight:700; letter-spacing:-.02em;
+  font-variant-numeric:tabular-nums; }
+.panel-ai .stat-callout .num, .page-ai .stat-callout .num { color:var(--ai); }
+.panel-sa .stat-callout .num, .page-sa .stat-callout .num { color:var(--sa); }
+.stat-callout .lbl { font:600 .74rem -apple-system, sans-serif; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); }
+
+/* ── TL;DR tile grid ──────────────────────── */
+.tldr-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:12px; margin:0 0 1.8em; }
+.tldr-tile { background:var(--bg-2); border:1px solid var(--line); border-radius:16px; padding:18px 20px;
+  transition:transform .2s cubic-bezier(.16,1,.3,1), box-shadow .2s ease, border-color .2s ease; }
+.tldr-tile:hover { transform:translateY(-3px); box-shadow:var(--shadow-s); }
+.panel-ai .tldr-tile:hover, .page-ai .tldr-tile:hover { border-color:var(--ai); }
+.panel-sa .tldr-tile:hover, .page-sa .tldr-tile:hover { border-color:var(--sa); }
+.tldr-tile .tic { font-size:1.3rem; display:block; margin-bottom:10px; }
+.tldr-tile .th { font-family:inherit; font-weight:700; font-size:.98rem; color:var(--ink);
+  line-height:1.35; margin:0 0 6px; letter-spacing:-.005em; }
+.tldr-tile .td { font-size:.87rem; color:var(--muted); line-height:1.55; }
+.tldr-tile .th a, .tldr-tile .td a { color:inherit; }
+
+/* ── Market table coloring ────────────────── */
+.report table td.pos, .report table td.neg { font-weight:700; font-variant-numeric:tabular-nums; }
+.report table td.pos { color:var(--sa); } .report table td.neg { color:#c0392b; }
+:root[data-theme="dark"] .report table td.neg { color:#ff6b5b; }
+.report table tr.pos-row td { background:var(--sa-soft); }
+.report table tr.neg-row td { background:rgba(192,57,43,.08); }
+:root[data-theme="dark"] .report table tr.neg-row td { background:rgba(255,107,91,.1); }
+.report table tr.pos-row td, .report table tr.neg-row td { border-bottom-color:var(--line); }
+
 /* ── Sources ──────────────────────────────── */
 .sources { margin-top:32px; padding-top:24px; border-top:1px solid var(--line); }
 .sources h3, .archive h3 { font:700 .72rem -apple-system, sans-serif; letter-spacing:.18em;
@@ -515,6 +563,165 @@ function sourcesHtml(domains) {
   return `<div class="sources reveal"><h3>Sources in this briefing</h3><div class="src-grid">${items}</div></div>`;
 }
 
+/* ── Rich report rendering: section eyebrows, TL;DR tile grid, a pulled-out
+   stat callout, colorized market tables, and jump navigation — instead of
+   handing the whole markdown blob to marked.parse() as one gray wall. ── */
+
+const ICON_RULES = [
+  [/\b(regulat|policy|law(suit)?|antitrust|ftc|compliance|ai act|sanction|court|penalt|fine[ds]?\b|verdict|su(e[sd]?|it)|ruling|ban(ned)?)/i, '⚖️'],
+  [/\b(fund(ing|ed)?|acqui|invest|ipo\b|valuation|raise[sd]?|round\b|monetiz|revenue|pricing|profit)/i, '💰'],
+  [/\b(hack|breach|vulnerab|security|exploit|attack|malware|rogue)/i, '🛡️'],
+  [/\b(chip|gpu|nvidia|hardware|datacenter|data center|compute\b)/i, '🖥️'],
+  [/\b(job|layoff|hir(e|ing)|workforce|headcount)/i, '👥'],
+  [/\b(research|paper|benchmark|study|breakthrough|math|proof)/i, '🔬'],
+  [/\b(releas|launch|unveil|debut|ship(ped)?|democrat|roll(s|ing)? ?out|update[ds]?|upgrad)/i, '🚀'],
+  [/\b(tasi|tadawul|index\b|market cap|shares?\b)/i, '📊'],
+  [/\b(oil|brent|opec|crude)/i, '🛢️'],
+  [/\b(bank|al ?rajhi|riyal|\bsar\b)/i, '🏦'],
+  [/\b(nomu|listing)/i, '🏛️'],
+  [/\b(model|gpt|claude|gemini|llm|luna|reasoning)/i, '🤖'],
+  [/\b(plugin|standard|protocol|mcp|interoperab)/i, '🔗'],
+  [/\b(china|chinese|alibaba|qwen|moonshot|kimi)/i, '🇨🇳'],
+];
+const pickIcon = text => (ICON_RULES.find(([re]) => re.test(text)) || [, '📰'])[1];
+
+const SECTION_ICONS = [
+  [/tl;?dr|quick take|summary|snapshot/i, '⚡'],
+  [/top stor|headline/i, '📰'],
+  [/polic|regulat/i, '⚖️'],
+  [/watch|ahead|upcoming/i, '👀'],
+  [/mover|gainer|loser/i, '📈'],
+  [/ipo|listing/i, '🏛️'],
+  [/macro|oil|econom/i, '🛢️'],
+  [/compan(y|ies)/i, '🏢'],
+];
+const pickSectionIcon = title => (SECTION_ICONS.find(([re]) => re.test(title)) || [, '🔹'])[1];
+
+// First striking figure in the text — currency+scale beats %, beats a plain
+// comma-grouped number. Used as the one big pulled-out stat under the top section.
+function extractStat(text) {
+  const currency = text.match(/[$€£]\s?[\d,.]+\s?(?:trillion|billion|million|[BMKT])?\b/i);
+  if (currency) return currency[0].trim();
+  const pct = text.match(/[+-]?\d+(?:\.\d+)?%/);
+  if (pct) return pct[0];
+  const big = text.match(/\b\d{1,3}(?:,\d{3})+(?:\.\d+)?\b/);
+  return big ? big[0] : null;
+}
+
+const POS_RE = /^\+|^▲|\bup\b|\bgain(ed|s)?\b|\bris(e|ing|es)\b|\badvanc/i;
+const NEG_RE = /^-|^▼|\bdown\b|\bdeclin|\bloss(es)?\b|\bfell\b|\bdrop(ped|s)?\b|\bretreat/i;
+
+function renderTable(token) {
+  const changeCol = token.header.findIndex(h => /change|move|%/i.test(h.text));
+  const rows = token.rows.map(row => {
+    let rowClass = '';
+    const cells = row.map((cell, i) => {
+      let html = marked.parseInline(cell.text);
+      const txt = cell.text.trim();
+      if (i === changeCol && !/^[▲▼]/.test(txt)) {
+        if (POS_RE.test(txt)) { rowClass = 'pos-row'; html = `<span class="pos">▲ ${html}</span>`; }
+        else if (NEG_RE.test(txt)) { rowClass = 'neg-row'; html = `<span class="neg">▼ ${html}</span>`; }
+      } else if (i !== changeCol && /^[+-]\s?[\d.,]+%?$/.test(txt)) {
+        if (/^\+/.test(txt)) { rowClass = rowClass || 'pos-row'; html = `<span class="pos">▲ ${html}</span>`; }
+        else { rowClass = rowClass || 'neg-row'; html = `<span class="neg">▼ ${html}</span>`; }
+      }
+      return `<td>${html}</td>`;
+    }).join('');
+    return `<tr class="${rowClass}">${cells}</tr>`;
+  }).join('');
+  const head = token.header.map(h => `<th>${marked.parseInline(h.text)}</th>`).join('');
+  return `<table><thead><tr>${head}</tr></thead><tbody>${rows}</tbody></table>`;
+}
+
+// Render a run of tokens, but hand off table tokens to the colorized renderer
+// and inject a small topic icon before every h3 story headline.
+function renderTokens(tokens) {
+  let html = '';
+  let buffer = [];
+  const flush = () => { if (buffer.length) { html += marked.parser(buffer); buffer = []; } };
+  for (const t of tokens) {
+    if (t.type === 'table') { flush(); html += renderTable(t); }
+    else if (t.type === 'heading' && t.depth === 3) {
+      flush();
+      html += `<h3><span class="ic">${pickIcon(t.text)}</span>${marked.parseInline(t.text)}</h3>`;
+    } else buffer.push(t);
+  }
+  flush();
+  return html;
+}
+
+// Turn a bulleted "**Headline** — description" list into a scannable tile grid.
+function renderTldrTiles(list) {
+  const tiles = list.items.map(item => {
+    const m = item.text.match(/^\*\*(.+?)\*\*\s*[-–—:]\s*(.*)$/s);
+    const headline = m ? m[1] : item.text.split(/[.!?]/)[0];
+    const desc = m ? m[2] : '';
+    return `<div class="tldr-tile">
+<span class="tic">${pickIcon(headline)}</span>
+<p class="th">${marked.parseInline(headline)}</p>
+${desc ? `<p class="td">${marked.parseInline(desc)}</p>` : ''}
+</div>`;
+  }).join('');
+  return `<div class="tldr-grid">${tiles}</div>`;
+}
+
+function renderReportRich(md) {
+  const tokens = marked.lexer(md);
+  const sections = [];
+  let preTokens = [];
+  let current = null;
+  for (const t of tokens) {
+    if (t.type === 'heading' && t.depth === 2) {
+      current = { title: t.text, tokens: [] };
+      sections.push(current);
+    } else if (current) current.tokens.push(t);
+    else preTokens.push(t);
+  }
+
+  const rawText = md.replace(/<!--.*?-->/gs, '');
+  const wordCount = rawText.split(/\s+/).filter(Boolean).length;
+  const readMins = Math.max(1, Math.round(wordCount / 200));
+  const storyCount = (rawText.match(/^### /gm) || []).length
+    || sections[0]?.tokens.find(t => t.type === 'list')?.items.length || 0;
+  const meta = `<p class="readmeta">${readMins} min read${storyCount ? ` · ${storyCount} stories` : ''}</p>`;
+
+  const jumpChips = sections.length > 1
+    ? `<div class="jump-chips">${sections.map((s, i) =>
+        `<a href="#sec-${i}">${pickSectionIcon(s.title)} ${s.title}</a>`).join('')}</div>`
+    : '';
+
+  const firstList = sections[0]?.tokens.find(t => t.type === 'list');
+  const stat = extractStat(sections[0]?.tokens.map(t => t.raw || '').join(' ') || '');
+  const statHtml = stat ? `<div class="stat-callout"><span class="num">${stat}</span><span class="lbl">Number of the day</span></div>` : '';
+
+  let body = '';
+  if (preTokens.length) body += renderTokens(preTokens);
+  sections.forEach((s, i) => {
+    body += `<div class="section" id="sec-${i}"><div class="section-eyebrow">
+<span class="eyebrow-badge">${pickSectionIcon(s.title)}</span>
+<span class="eyebrow-label">${s.title}</span><span class="eyebrow-rule"></span></div>`;
+    if (i === 0 && statHtml) body += statHtml;
+    if (i === 0 && firstList) {
+      body += renderTldrTiles(firstList);
+      body += renderTokens(s.tokens.filter(t => t !== firstList));
+    } else {
+      body += renderTokens(s.tokens);
+    }
+    body += `</div>`;
+  });
+
+  return { html: body, meta, jumpChips };
+}
+
+function renderReport(md) {
+  try {
+    return renderReportRich(md);
+  } catch (e) {
+    console.warn('renderReport: falling back to plain render —', e.message);
+    return { html: marked.parse(md), meta: '', jumpChips: '' };
+  }
+}
+
 // Wrap each word in overflow-hidden + inner span for a masked reveal animation.
 function revealWords(text, delayStep = 65) {
   return text.split(' ').map((w, i) =>
@@ -578,12 +785,15 @@ for (const a of AGENTS) {
   } else {
     const latest = reports[0];
     const { md, meta, domains } = parseReport(fs.readFileSync(path.join(REPORTS_DIR, latest), 'utf8'));
+    const { html, meta: readMeta, jumpChips } = renderReport(md);
     inner = `<div class="cardhead">
 <h2>${a.longTitle}</h2>
 <span class="badge ${a.accent}">${prettyDate(dateOf(latest, a.slug))}</span>
 </div>
+${readMeta}
 ${provenanceHtml(meta, domains)}
-<div class="report reveal in">${marked.parse(md)}</div>
+${jumpChips}
+<div class="report reveal in">${html}</div>
 ${sourcesHtml(domains)}`;
     if (reports.length > 1) {
       inner += `<div class="archive reveal"><h3>Previous briefings</h3><div class="archive-scroll">` +
@@ -630,6 +840,7 @@ for (const f of files) {
   const agent = AGENTS.find(a => f.startsWith(`${a.slug}-`));
   if (!agent) continue;
   const { md, meta, domains } = parseReport(fs.readFileSync(path.join(REPORTS_DIR, f), 'utf8'));
+  const { html, meta: readMeta, jumpChips } = renderReport(md);
   const date = dateOf(f, agent.slug);
   const hero = heroSection({
     kicker: `${agent.emoji} Archive`,
@@ -638,8 +849,10 @@ for (const f of files) {
   });
   const body = `<section class="panel panel-${agent.accent} active pagecard"><div class="card">
 <div class="cardhead"><h2>${agent.longTitle}</h2><span class="badge ${agent.accent}">${prettyDate(date)}</span></div>
+${readMeta}
 ${provenanceHtml(meta, domains)}
-<div class="report reveal in">${marked.parse(md)}</div>
+${jumpChips}
+<div class="report reveal in">${html}</div>
 ${sourcesHtml(domains)}
 </div></section>`;
   fs.writeFileSync(
