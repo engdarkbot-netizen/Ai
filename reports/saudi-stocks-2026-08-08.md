@@ -1,50 +1,65 @@
 # Saudi Stock Market Briefing (Tadawul) — 2026-08-08
+<!-- meta: model=anthropic/claude-sonnet-4.5 sources=4 verified=yes generated=2026-08-08T10:53:03.011Z -->
 
-# Saudi Market Briefing – August 8, 2026
+# Saudi Stock Market Briefing – 8 August 2026
 
 ## Market Snapshot
 
-**TASI: 10,823.62** | **+113.48 (+1.06%)**
+**TASI: 11,187.66** | **-50.41 (-0.45%)** | **Volume: SAR 6bn**
 
-- Tadawul rebounded from early session weakness, closing up 1.06% after opening down 0.70%
-- Market showed resilience with a 100-point intraday swing from session lows
-- Volume remained moderate at SAR 5.29 billion as investors assessed regional cues
+- The Tadawul All Share Index declined 0.45%, closing at 11,187.66 points with SAR 6 billion in trading value
+- 297 million shares traded during the session, with 189 companies advancing and 66 declining
+- Parallel market (Nomu) rose 242.49 points to 22,159.27 with SAR 19 million traded
 
-**Session Details:** Open 10,710.14 | High 10,910.14 | Low 10,710.14 | Close 10,823.62
-([saudiexchange.sa](https://www.saudiexchange.sa/wps/portal/saudiexchange/ourmarkets/main-market-watch))
-
-**Nomu (Parallel Market):** 21,916.78 points
-([saudiexchange.sa](https://www.saudiexchange.sa/wps/portal/saudiexchange/ourmarkets/main-market-watch))
+[saudiexchange.sa](https://www.saudiexchange.sa/wps/portal/saudiexchange/ourmarkets/main-market-watch/main-market-performance)
 
 ## Top Movers
 
-**Market Breadth:** 199 stocks declined versus gainers during the session, indicating selective buying pressure that lifted the index despite broader weakness
-([saudiexchange.sa](https://www.saudiexchange.sa/wps/portal/tadawul/home/))
+| Company | Move | Notes |
+|---------|------|-------|
+| Aslak | +9.94% | Top gainer |
+| Medgulf Insurance | Strong gain | Insurance sector strength |
+| Printing and Packaging | Strong gain | Among top gainers |
+| Al-Etihad | -7.73% | Biggest decliner |
+| Dallah Healthcare | Decline | Among top decliners |
+| Mutakamelah | Decline | Among top decliners |
 
-*Note: Specific company-level price movements and sector performance data were not available in current sources. The market showed an intraday reversal pattern with the benchmark recovering from opening losses.*
+**Most Active by Volume:** Petro Rabigh, Saudi Aramco, Americana, Kayan Saudi, Export Development
 
-## Market Commentary
+**Most Active by Value:** Saudi Aramco, Petro Rabigh, Al Rajhi, Al Ahli, Alinma
 
-The Tadawul displayed notable volatility on Wednesday, opening sharply lower at 10,710.14 (down 0.70%) before staging a recovery to close up 1.06% at 10,823.62. The nearly 100-point swing from session lows suggests institutional buying emerged after the weak open, though broader market breadth remained negative with 199 declining stocks.
+[ajel.sa](https://english.ajel.sa/saudi-arabia/1cu3818ci)
 
-The intraday turnaround occurred without clear fundamental catalysts apparent from opening data, according to [businessupturn.com](https://businessupturn.com/asia/middle-east-asia/saudi-arabia/tadawul-slips-at-open-as-saudi-shares-index-falls-0-70-2/). Market participants appeared to be assessing regional and global macroeconomic cues, with energy and financial sector heavyweights likely playing a key role in the index's recovery.
+## Recent Company News
 
-Trading value of SAR 5.29 billion represents moderate activity levels as investors maintained a cautious stance despite the positive close ([saudiexchange.sa](https://www.saudiexchange.sa/wps/portal/tadawul/home/)).
+**Aldrees Petroleum and Transport Services:**
+- Q1 2026 net profit reached SAR 110 million, up 8.9% year-on-year
+- Stock closed at SR 124.60, down 1.92%
+- Growth driven by higher sales from petrol and transport divisions, increased bank deposit income, and higher returns from joint venture investments
 
-## Macro Context
+**Saudi National Bank:**
+- Q1 2026 net profit of SAR 6.42 billion, up 6.66% year-on-year
+- Growth attributed to higher operating income and lower operating expenses
+- Stock closed at SR 41.94, down 2.40%
 
-**MT30 Index (Top 30 stocks):** 1,449.86 points, reflecting large-cap performance
-([saudiexchange.sa](https://www.saudiexchange.sa/wps/portal/saudiexchange/ourmarkets/main-market-watch))
+[arabnews.com](https://www.arabnews.com/node/2640726/amp)
 
-Market participants continue monitoring oil price trends and their impact on Saudi Arabia's energy-heavy index, though specific crude prices for today's session were not immediately available in search results.
+## Market Context
 
----
+**Year-to-Date Performance:** The TASI has gained 6.29% in 2026, with April closing at 11,187.66 after a -0.45% decline on the final day of the month.
+
+**52-Week Range:** The index has traded between approximately 10,193.83 and 11,781.68 over the past year, currently positioned in the middle of this range.
+
+**Sector Rotation:** Recent sessions have shown increased activity in banking stocks (Al Rajhi, SNB, Alinma) and energy names (Saudi Aramco, Petro Rabigh), indicating sustained investor interest in these core sectors.
+
+[countryeconomy.com](https://countryeconomy.com/stock-exchange/saudi-arabia?dr=2026-04)
 
 ## Ahead
 
-- Monitor whether the Tadawul can build on today's recovery or if selling pressure returns
-- Watch for Vision 2030 project announcements and PIF activity that could impact market sentiment
-- Earnings season developments for major listed companies
-- Any CMA regulatory updates or new IPO pipelines on main market and Nomu
+**Watch for:**
+- Continuation of Q1 2026 earnings reports from listed companies
+- Trading patterns in banking and energy sectors, which dominate market value
+- Technical support levels as the index navigates mid-range territory
+- Sector rotation dynamics between financial and industrial stocks
 
-*Data reflects trading session ending August 8, 2026. Saudi market operates Sunday-Thursday.*
+**Trading Note:** Markets are closed Friday-Saturday; next session Sunday, 10 August 2026.
