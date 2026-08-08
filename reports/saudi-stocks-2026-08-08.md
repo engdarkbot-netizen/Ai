@@ -1,71 +1,118 @@
 # Saudi Stock Market Briefing (Tadawul) — 2026-08-08
-<!-- meta: model=anthropic/claude-sonnet-4.5 sources=4 verified=yes generated=2026-08-08T11:04:16.023Z -->
+<!-- meta: model=anthropic/claude-sonnet-4.5 sources=3 verified=yes generated=2026-08-08T11:25:58.041Z -->
 
 # Saudi Stock Market Briefing – 8 August 2026
 
 ## Market Snapshot
 
-**TASI: 10,973.08** (+44.29, +0.40%)
+**TASI:** 10,589.72 points | **Change:** +0.43% (Thursday close)
 
-- Saudi benchmark closed higher on Monday with SAR 5.7 billion in trading value and 268 million shares exchanged
-- 96 companies advanced while 164 declined, reflecting selective investor positioning
-- Key support came from blue-chip stocks including Saudi Aramco, Al Rajhi Bank, Al Ahli Bank, Alinma Bank, and STC
+**TL;DR:**
+- Tadawul closed higher on Thursday (1 August 2026), extending a multi-session recovery
+- Banking and telecommunications sectors led gains; insurance and capital goods lagged
+- Trading value reached SAR 4.6bn with 122 gainers vs. 129 decliners
+- Index remains mid-range of 52-week span, testing resistance near 10,600
 
-*Source: [thepeninsulaqatar.com](https://thepeninsulaqatar.com/article/08/06/2026/saudi-stock-market-index-closes-higher-5)*
+*Sources: [alrajhi-capital.sa](https://alrajhi-capital.sa/-/media/Feature/AlRajhiCapital/ResearchListing/Daily-Reports/2026/AUG/DMR-English---02-August-2026.pdf), [businessupturn.com](https://businessupturn.com/asia/middle-east-asia/saudi-arabia/saudi-tadawul-inches-higher-at-open/)*
 
-## Parallel Market
-
-**Nomu: 22,750.48** (-239.14, -1.04%)
-
-- Parallel market declined with SAR 15 million traded and 1.1 million shares exchanged
-- Continues volatility trend seen in recent sessions
-
-*Source: [thepeninsulaqatar.com](https://thepeninsulaqatar.com/article/08/06/2026/saudi-stock-market-index-closes-higher-5)*
+---
 
 ## Top Movers
 
-**Monday's Leading Gainers:**
-- CGS-CIMB Saudi Arabia
-- National Education Company (Al Wataniya)
-- Amana Insurance
-- Maharat
-- Walaa Insurance
+| Company | Price (SAR) | Move | Context |
+|---------|-------------|------|---------|
+| Saudi National Bank | 39.2 | +2.9% | Strong institutional buying; contributed 19.6 points to index |
+| Al Rajhi Bank | 62.6 | +0.6% | Added 8.6 points to index; traded SAR 323.5mn |
+| STC | 43.1 | +1.9% | Telecommunications sector gained 1.46%; value SAR 206mn |
+| Saudi Aramco | 26.5 | +0.8% | Added 12.4 points despite energy sector up only 0.7% |
+| Tawuniya | 122.6 | -10.0% | Largest loser; traded SAR 154.3mn on heavy volume |
+| Chemanol | 35.9 | -10.0% | Sharp decline on earnings concerns |
+| Riyadh Cement | 20.9 | -5.1% | Hit 52-week low; capital goods sector down 2.04% |
 
-**Leading Decliners:**
-- Al Mamlaka (Kingdom Holding) 
-- Saudi Pharmaceutical Industries & Medical Appliances (SPIMACO)
-- SAICO
-- Al Kathiri Holding
-- National Industrialization Company (Tasnee) - down 4.31%
+*Source: [alrajhi-capital.sa](https://alrajhi-capital.sa/-/media/Feature/AlRajhiCapital/ResearchListing/Daily-Reports/2026/AUG/DMR-English---02-August-2026.pdf)*
 
-**Most Active by Volume:**
-- Americana Group
-- Saudi Steel Pipe Company (Abyat)
-- Pan Gulf Holding
-- Saudi Aramco
-- Al Rajhi Bank
-
-*Source: [saudinabd.com](https://saudinabd.com/ecconomy/0806/57847/)*
-
-## Recent Sessions Context
-
-**Tuesday (Previous Session):** TASI closed at 10,858.14 (+34.52), with SAR 6 billion traded. Petro Rabigh, Saudi Aramco, Americana, Kayan Saudi, and Export Development led volume. Aslak, Medgulf Insurance, Printing and Packaging, Astra Industrial, and Walaa were top gainers (up to +9.94%). Al-Etihad, Dallah Healthcare, Mutakamelah, SAICO, and Tabuk Agricultural declined (down to -7.73%).
-
-*Source: [ajel.sa](https://english.ajel.sa/saudi-arabia/1cu3818ci)*
-
-**Wednesday:** TASI gained 0.3% to 10,888 points (highest close in over a month) with SAR 5.1 billion traded. Al Rajhi Bank rose 1% to SAR 65, ACWA Power climbed 3% to SAR 201.30, and Maaden gained 2% to SAR 59.60. Alandalus Sports Clubs, Al Wataniya, ACIG, Aslak, and PCI advanced 5-10%. Saudi Aramco fell 1% to SAR 26.74, while Saudi Investment Bank dropped 2% to SAR 13.80 (ex-dividend).
-
-*Source: [aawsat.com](https://english.aawsat.com/business/5303747-saudi-market-extends-gains-support-blue-chip-stocks)*
+---
 
 ## Company News
 
-**Earnings Disappointments:** Retal declined 8% and Marafiq fell 10% after reporting Q2 2026 losses. Lumi Rental dropped 5% to SAR 27.24 (lowest since IPO) following an 80% year-on-year profit decline in Q2 2026.
+**Banking Sector Strength**
 
-*Source: [aawsat.com](https://english.aawsat.com/business/5303747-saudi-market-extends-gains-support-blue-chip-stocks)*
+Banks sector gained 1.40% on Thursday, providing crucial index support. Saudi National Bank led with 2.9% gains on turnover of SAR 263.6mn, while Al Rajhi Bank added SAR 323.5mn in traded value. The sector's performance reflects investor confidence in domestic credit growth tied to Vision 2030 infrastructure spending.
 
-## Market Outlook
+*Source: [alrajhi-capital.sa](https://alrajhi-capital.sa/-/media/Feature/AlRajhiCapital/ResearchListing/Daily-Reports/2026/AUG/DMR-English---02-August-2026.pdf)*
 
-The main index approaches the psychological 11,000 level after multiple positive sessions driven by blue-chip stocks. Continued selectivity evident in mixed breadth, with investors favoring established names while remaining cautious on earnings misses. The parallel market's weakness contrasts with main market resilience.
+**Q2 Earnings Reports**
+
+- **Saudi Chemical**: Q2 2026 net profit rose 16.0% YoY to SAR 80.6mn, driven by lower finance costs and reduced credit losses
+- **Bupa Arabia**: Q2 profit increased 7.2% YoY to SAR 306.8mn on solid investment returns
+- **Gulf Insurance Group**: Q2 net profit up 13.4% YoY to SAR 38.7mn from strong insurance revenue growth
+- **Sport Clubs Co.**: Q2 bottom line jumped 100.9% YoY to SAR 13.8mn on expanding memberships
+
+*Source: [alrajhi-capital.sa](https://alrajhi-capital.sa/-/media/Feature/AlRajhiCapital/ResearchListing/Daily-Reports/2026/AUG/DMR-English---02-August-2026.pdf)*
+
+**Sector Weakness**
+
+Insurance sector declined 4.03%, led by Tawuniya's 10% drop. Capital goods fell 2.04% with cement stocks under pressure—Riyadh Cement, Saudi Cement, and City Cement all touched 52-week lows. The materials sector dropped 0.6% amid continued construction sector headwinds.
+
+*Source: [alrajhi-capital.sa](https://alrajhi-capital.sa/-/media/Feature/AlRajhiCapital/ResearchListing/Daily-Reports/2026/AUG/DMR-English---02-August-2026.pdf)*
 
 ---
-*Data as of Monday, 8 August 2026. Tadawul trades Sunday-Thursday. Note: Some cited sources reference earlier sessions to provide context for Monday's trading.*
+
+## Major Recent Developments
+
+**Wednesday's Strong Rally**
+
+On Wednesday (31 July), TASI surged 117.75 points (+1.10%) to 10,823.62 with trading value reaching SAR 6.2bn—the strongest single-day performance in recent sessions. Leading gainers included National Education, Bateraraq, Sadaat, Jabal Omar, with approximately 335 million shares traded.
+
+*Source: [jarayid.com](https://jarayid.com/en/saudi-arabia/1388712/saudi-stocks-up-117-points-with-62b-riyals)*
+
+**Parallel Market Performance**
+
+The Nomu parallel market index rose 22.13 points on Wednesday to reach 21,916.78 points, reflecting continued appetite for smaller-cap growth stories alongside blue-chip activity on the main board.
+
+*Source: [jarayid.com](https://jarayid.com/en/saudi-arabia/1388712/saudi-stocks-up-117-points-with-62b-riyals)*
+
+---
+
+## Macro Context
+
+**Oil Market Pressures**
+
+Energy sector gained only 0.7% on Thursday despite Saudi Aramco's positive contribution, reflecting broader oil market weakness. Global crude prices remain under pressure, though the sector has shown resilience compared to historical correlations.
+
+**Foreign Investment Flows**
+
+Weekly ownership data shows continued institutional participation, with foreign investors adjusting sector allocations. Banks and telecommunications attracted inflows while materials and capital goods saw modest outflows.
+
+*Source: [alrajhi-capital.sa](https://alrajhi-capital.sa/-/media/Feature/AlRajhiCapital/ResearchListing/Daily-Reports/2026/AUG/DMR-English---02-August-2026.pdf)*
+
+**Global Markets Context**
+
+MSCI Emerging Markets index gained 6.6% month-to-date through Thursday, outpacing developed markets (+0.5%). Regional indices showed mixed performance with Saudi Arabia's modest gains tracking broader EM strength.
+
+*Source: [alrajhi-capital.sa](https://alrajhi-capital.sa/-/media/Feature/AlRajhiCapital/ResearchListing/Daily-Reports/2026/AUG/DMR-English---02-August-2026.pdf)*
+
+---
+
+## Ahead
+
+**Technical Levels**
+
+Thursday's close at 10,589.72 places TASI near mid-range of its 52-week trading band. Resistance emerges at 10,650-10,700; support sits at 10,500. Market breadth (122 gainers vs. 129 decliners) suggests consolidation likely before next directional move.
+
+**Key Catalysts**
+
+- **Banking earnings continuation**: Further Q2 results from financial sector will test leadership thesis
+- **Cement sector weakness**: Persistent 52-week lows in construction materials warrant monitoring
+- **Oil price trajectory**: Energy sector performance critical for broader index direction
+- **Volume trends**: Daily turnover above SAR 5bn signals sustained institutional interest
+
+**Sunday Session Watch**
+
+Markets reopen Sunday 4 August after weekend. Friday data unavailable as Saudi market operates Sunday-Thursday schedule. Weekend news flow and Saturday crude pricing will influence Sunday's open.
+
+*Source: [alrajhi-capital.sa](https://alrajhi-capital.sa/-/media/Feature/AlRajhiCapital/ResearchListing/Daily-Reports/2026/AUG/DMR-English---02-August-2026.pdf)*
+
+---
+
+*Data as of Thursday, 1 August 2026 market close. Saudi Exchange operates Sunday-Thursday.*
